@@ -1,4 +1,8 @@
-dependencies:
-  community.postgresql: '2.1.5'
-  community.mysql.mysql_query: '2.3.7'
+---
+
+collections:
+  - name: community.postgresql
+    version: 2.1.5
+  - name: community.mysql.mysql_query
+    version: 2.3.7
 
