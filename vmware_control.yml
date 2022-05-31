@@ -1,0 +1,148 @@
+
+- name: VMWare Start-Up Controll
+  block:
+
+    - set_fact:
+        retry_count: "{{ 1 if retry_count is undefined else retry_count | int + 1 }}"
+
+    # Should be a get uri
+
+    - name: Try-{{ retry_count}} Get vCenter Start-up stats
+      command:
+        cmd: cat /tmp/test2.json
+      register: vmj2
+
+    - set_fact:
+        j2: "{{ vmj2.stdout | from_json }}"
+
+#    - debug:
+#        var: j2
+
+#    - debug:
+#        var: item
+#      with_items: "{{ j2['output-parameters'][0].value.string.value.split(',') | replace('\"','') }}"
+
+    - set_fact:
+        jlines: "{{ j2['output-parameters'][0].value.string.value.split(',') | replace('\"','') }}"
+
+    - debug:
+        var: jlines
+
+    - set_fact:
+        newstats: "{{ newstats | default([]) + [{ 'name': item.split('|')[0]|replace('[',''), 'state': item.split('|')[1], 'vcenter': item.split('|')[3], 'id': item.split('|')[4]|replace(']','') }] }}"
+      with_items: "{{ jlines }}"
+
+    - debug:
+        var: vminitial_stats
+
+    - debug:
+        var: newstats
+
+    - set_fact:
+        update_list: "{{ update_list | default({}) | combine({key: {'id': id, 'state': state, 'vcenter': vcenter }}) }}"
+      vars:
+        key: "{{ item.name }}"
+        id: "{{ item.id }}"
+        state: "{{ item.state }}"
+        vcenter: "{{ item.vcenter }}"
+      when: >
+        ( not key in newstats and not key in vminitial_stats) or
+        ( not key in newstats and key in vminitial_stats and id > vminitial_stats[key].id ) or
+        ( key in newstats and not key in vminitial_stats and id > newstats[key].id ) 
+      with_items: "{{ newstats }}"
+
+#    - set_fact:
+#        statelist: "{{ statelist | default({}) | combine({item.name: {'id': item.id, 'state': item.state, 'vcenter': item.vcenter }}) }}"
+#      when: >
+#        ( not kname in newstats and not kname in vminitial_stats ) or 
+#        ( kname in newstats and item.id > newstats[kname].id and kname not in vminitial_stats ) or
+#        ( kname in vminitial_stats and vminitial_stats[kname].id < item.id and not kname in newstats )
+#        - not item.name in vminitial_stats
+#        - statelist[item.name].id > vminitial_stats[item.name].id
+#        - statelist[item.name].vcenter == vminitial_stats[item.name].vcenter
+#      vars:
+#        kname: "{{ item.name }}"
+#      with_items: "{{ newstats }}"
+
+#    - set_fact:
+#        statelist: "{{ statelist | default({}) | combine({item.name: {'id': item.id, 'state': item.state, 'vcenter': item.vcenter }}) }}"
+#      when:
+#        - kname in vminitial_stats 
+#        - item.id > vminitial_stats[kname].id
+#      vars:
+#        kname: "{{ item.name }}"
+#      with_items: "{{ newstats }}"
+
+    - debug:
+        var: update_list
+
+#    - file:
+#        path: /tmp/vmstats.csv
+#        state: absent
+#
+#    - lineinfile:
+#        line: "{{ item | replace('[','') | replace(']','') | replace('||','|') | replace('|',' ') }}"
+#        dest: /tmp/vmstats.csv
+#        create: true
+#      with_items:
+#          - "{{ j2['output-parameters'][0].value.string.value.split(',') | replace('\"','') }}"
+
+#    - name: generate delta
+#      shell: awk '$4 > max[$1] { max[$1]=$4; row[$1]=$0 } END { for (i in row) print row[i] }' /tmp/vmstats.csv >/tmp/newstats.csv
+#      register: newstats
+#
+#    - set_fact:
+#        nj: "{{ newstats.stdout_lines }}"
+#
+#    - debug:
+#        var: nj
+#
+#    - read_csv:
+#        path: /tmp/newstats.csv
+#        fieldnames: vm,state,center,id
+#        delimiter: ' '
+#      register: vmstats 
+
+#    - debug:
+#        var: vmstats.list
+
+#    - set_fact:
+#        mystats: "{{ mystats | default([]) +  [{ 'name': item.vm, 'id': item.id, 'state': item.state, 'vcenter': item.center }] }}"
+#      with_items: "{{ vmstats.list | json_query('[*]') }}"
+
+#    - debug:
+#        var: mystats
+#        var: myinitial
+
+#    - name: generate delta state
+#      template:
+#        src: files/vmware_stats.j2
+#        dest: /tmp/vmware_delta.csv
+
+
+    - debug:
+        msg: "VMWare start is {{ j2.state }}"
+      when: j2.state == "completed"
+
+    - fail:
+      when: j2.state != "completed"
+
+  rescue:
+
+#    - fail:
+#        msg: Maximum retries of grouped tasks reached
+#      when: retry_count | int == 15
+
+    - name: pause a moment
+      pause:
+        seconds: 5
+        #minutes: 1
+      when: j2.state != "completed"
+
+    - debug:
+        msg: "VMWare startup hasen't finished yet, retry"
+      when: j2.state != "completed"
+
+    - include_tasks: vmware_control.yml
+      when: j2.state != "completed"
+

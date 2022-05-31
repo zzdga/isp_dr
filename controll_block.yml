@@ -1,0 +1,28 @@
+
+- set_fact:
+    lcontinue: true
+
+- name: controll block
+  block:
+
+    - name: get vmware state
+      debug:
+        msg: "running get on {{ vmware_url }}"
+
+    - set_fact:
+        vmstate_out: >
+          a up
+          b down
+          c up
+          start END
+  
+    - debug:
+        var: vmstate_out
+
+    - set_fact:
+        lcontinue: false
+      when: "'END' in vmstate_out "
+ 
+  when: lcontinue | bool
+
+

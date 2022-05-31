@@ -1,0 +1,43 @@
+
+- name: Group of tasks that are tightly coupled
+  block:
+
+    - name: Increment the retry count
+      set_fact:
+        retry_count: "{{ 0 if retry_count is undefined else retry_count | int + 1 }}"
+
+    - name: get vmware state file {{ retry_count }}
+      command:
+        cmd: cat /tmp/test.txt
+      register: vmout
+
+    - name: insert vmware stats {{ retry_count }}
+      debug:
+        msg: "{{ vmout.stdout_lines }}"
+
+    - debug:
+        msg: "Found END message"
+      when: "'END' in vmout.stdout_lines"
+
+    - fail:
+      when: "not 'END' in vmout.stdout_lines"
+
+  rescue:
+
+    - fail:
+        msg: Maximum retries of grouped tasks reached
+      when: retry_count | int == 15
+
+    - name: pause a moment
+      pause:
+        seconds: 1
+#        minutes: 1
+      when: "not 'END' in vmout.stdout_lines"
+
+    - debug:
+        msg: "VMWare startup hasen't finished yet, retry"
+      when: "not 'END' in vmout.stdout_lines"
+
+    - include_tasks: loop_control.yml
+      when: "not 'END' in vmout.stdout_lines"
+

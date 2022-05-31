@@ -1,0 +1,12 @@
+- name: id play
+  hosts: all
+  gather_facts: false
+
+  tasks:
+
+    - command: id
+      register: myid
+
+    - debug:
+        var: myid
+

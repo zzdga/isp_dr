@@ -1,0 +1,7 @@
+
+- name: write to db
+  debug:
+    var: db_operation
+  delegate_to: "{{ db_server }}"
+
+

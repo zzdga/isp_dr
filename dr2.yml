@@ -1,0 +1,80 @@
+
+- name: "ISP {{ ambiente }} Environment DR Switch to {{ sito }} Site"
+  hosts: localhost
+  gather_facts: false
+
+  pre_tasks:
+
+    - assert:
+        that: "{{ item }} is defined"
+      with_items:
+        - ambiente
+        - sito
+
+    - name: Loading {{ ambiente }} Environment Settings for Site {{ sito }}
+      include_vars: 
+        dir: vars/{{ ambiente }}/{{ sito }}
+        depth: 1
+
+    # 
+    # Should POST "Start-Up" to other Orchestrators
+    #
+
+    #- name: load initial vmstate
+    #  read_csv:
+    #    path: /tmp/vminitial.csv
+    #    fieldnames: vm,state,center,id
+    #    delimiter: '|'
+    #  register: vminitial 
+
+    - name: Load VMs Initial State from DB
+      postgresql_query:
+        db: dr
+        login_user: "{{ db_user }}"
+        login_password: "{{ db_password }}"
+        login_host: "{{ db_host }}"
+        query: select * from {{ db_table }}
+        #ssl_mode: disable
+      register: vminitial
+
+#    - debug:
+#        var: vminitial.query_result
+
+    - set_fact:
+        myinitial: "{{ myinitial | default({}) | combine({item.split('|')[0]: {'id': item.split('|')[3], 'state': item.split('|')[1], 'vcenter': item.split('|')[2] }}) }}"
+##        myinitial: "{{ myinitial | default({}) | combine({item.vm: {'id': item.id, 'state': item.state, 'vcenter': item.vcenter }}) }}"
+      with_items: "{{ vminitial.stdout_lines }}"
+##      with_items: "{{ vminitial.query_result }}"
+      #no_log: true
+
+#    - debug:
+#        var: myinitial
+
+    - set_fact:
+        href_vmstats: "j1.relations.link[-1].href"
+
+    - name: GET vCenter Initial
+      debug:
+        msg: GET URI with HREF {{ href_vmstats }}
+
+#    - name: write message to ISP-DR Console DB
+#      include_tasks: write2db.yml
+#      vars:
+#        db_name: "{{ db_server }}"
+#        db_operation:
+
+  tasks:
+
+    # After all initial tasks, now loop while waiting for startup to complete
+
+    - name: Starting controll for vCenter completition
+      include_tasks: vmware_control.yml
+      vars: 
+        vminitial_stats: "{{ myinitial }}"
+
+  post_tasks:
+
+    - debug:
+        msg: vCenter Start-Up has completed
+
+    # Save last state to DB and Update info

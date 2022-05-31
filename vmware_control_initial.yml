@@ -1,0 +1,97 @@
+
+- name: VMWare Start-Up Controll
+  block:
+
+    - set_fact:
+        retry_count: "{{ 1 if retry_count is undefined else retry_count | int + 1 }}"
+
+    - name: get vmware json file {{ retry_count }}
+      command:
+        cmd: cat /tmp/test1.json
+      register: vmj1
+
+    - name: get vmware json file {{ retry_count }}
+      command:
+        cmd: cat /tmp/test2.json
+      register: vmj2
+
+    - set_fact:
+        j1: "{{ vmj1.stdout | from_json }}"
+        j2: "{{ vmj2.stdout | from_json }}"
+
+    - set_fact:
+        vm_href: "{{ j1.relations.link[-1].href }}"
+
+    - debug:
+        msg: "VMWare URI: {{ vm_href }}"
+
+#    - file:
+#        path: /tmp/vmstats.csv
+#        state: absent
+#
+#    - lineinfile:
+#        line: "{{ item | replace('[','') | replace(']','') | replace('||','|') | replace('|',' ') }}"
+#        dest: /tmp/vmstats.csv
+#        create: true
+#      with_items:
+#          - "{{ j2['output-parameters'][0].value.string.value.split(',') | replace('\"','') }}"
+
+    - name: generate delta
+      shell: awk '$4 > max[$1] { max[$1]=$4; row[$1]=$0 } END { for (i in row) print row[i] }' /tmp/vmstats.csv >/tmp/newstats.csv
+      register: newstats
+
+    - set_fact:
+        nj: "{{ newstats.stdout_lines }}"
+
+    - debug:
+        var: nj
+
+    - read_csv:
+        path: /tmp/newstats.csv
+        fieldnames: vm,state,center,id
+        delimiter: ' '
+      register: vmstats 
+
+#    - debug:
+#        var: vmstats.list
+
+    - set_fact:
+        mystats: "{{ mystats | default([]) +  [{ 'name': item.vm, 'id': item.id, 'state': item.state, 'vcenter': item.center }] }}"
+      with_items: "{{ vmstats.list | json_query('[*]') }}"
+
+    - debug:
+        var: mystats
+#        var: myinitial
+
+#    - name: generate delta state
+#      template:
+#        src: files/vmware_stats.j2
+#        dest: /tmp/vmware_delta.csv
+
+
+    - debug:
+        msg: "VMWare start is {{ j2.state }}"
+      when: j2.state == "completed"
+
+    - fail:
+      when: j2.state != "completed"
+
+  rescue:
+
+#    - fail:
+#        msg: Maximum retries of grouped tasks reached
+#      when: retry_count | int == 15
+
+    - name: pause a moment
+      pause:
+        seconds: 5
+        #minutes: 1
+      when: j2.state != "completed"
+
+    - debug:
+        msg: "VMWare startup hasen't finished yet, retry"
+      when: j2.state != "completed"
+
+    - include_tasks: vmware_control.yml
+      when: j2.state != "completed"
+

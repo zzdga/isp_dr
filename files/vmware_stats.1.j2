@@ -1,0 +1,15 @@
+{% for entry in vmstats %}
+{{ entry }}
+#{% if not newstats[entry.vm] is defined %}
+#{% set newstats[entry.vm].state = entry.state %}
+#{% set newstats[entry.vm].id = entry.id %}
+#{% endif %}
+#{% if newstats[entry.vm] is defined and newstats[entry.vm].id < entry.id %}
+#{% set newstats[entry.vm].state = entry.state %}
+#{% set newstats[entry.vm].id = entry.id %}
+#{% endif %}
+{% end for %}
+#>>>DEBUG
+#{{ newstats }}
+#<<<DEBUG
+

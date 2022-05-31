@@ -1,0 +1,64 @@
+
+- name: Switch to Parma
+  hosts: localhost
+  gather_facts: false
+
+  pre_tasks:
+
+    - name: include {{ sito }} vars for environment {{ ambiente }}
+      include_vars: 
+        dir: vars/{{ ambiente }}/{{ sito }}
+        depth: 1
+
+    - include_tasks: write2db.yml
+      vars:
+        db_name: "{{ db_server }}"
+        db_operation: "insert start DR on site {{ sito }}"
+
+  tasks:
+
+    - name: start {{ site }} vCenter
+      uri:
+        url: "{{ vmware_url }}"
+        user: "{{ vmware_usr }}"
+        password: "{{ vmware_pwd }}"
+        method: POST
+        body: "{{ lookup('file','vmware_start.xml') }}"
+        force_basic_auth: yes
+#        status_code: 201
+        body_format: application/xml
+      ignore_errors: true
+      register: start_vmware
+      when: vmware_server == inventory_hostname
+
+    - name: start {{ sito }} Rundeck 
+      uri:
+        url: "{{ rundeck_url }}"
+        user: "{{ rundeck_usr }}"
+        password: "{{ rundeck_pwd }}"
+        method: POST
+        body: "{{ lookup('file','rundeck_start.xml') }}"
+        force_basic_auth: yes
+        status_code: 201
+        body_format: application/xml
+      ignore_errors: true
+      register: start_rundeck
+      when: rundeck_server == inventory_hostname
+      
+   - name: {{ site }} vCenter Controll
+     uri:
+       url: "{{ vmware_url }}"
+       user: "{{ vmware_usr }}"
+       password: "{{ vmware_pwd }}"
+       method: POST
+       body: "{{ lookup('file','vmware_status.xml') }}"
+       force_basic_auth: yes
+       status_code: 201
+       body_format: application/xml
+     until: "'END' in status_vmware.stdout_lines | last"
+     retries: 10
+     delay: 360
+     ignore_errors: true
+     register: status_vmware
+     when: vmware_server == inventory_hostname
+      

@@ -1,0 +1,12 @@
+{% set newstats = dict() %}
+{% for item in mystats %}
+{% set name    =  item.name %}
+{% set id      =  item.id %}
+{% set state   =  item.state %}
+{% set vcenter =  item.vcenter %}
+{% if not item.name in newstats %}
+{{ item.name }} {{ item.id }} {{ item.state }}
+{% set x=newstats.__setitem__(item.name,item.id) %}
+{% endif %}
+{% endfor %}
+{{ newstats }}
