@@ -29,7 +29,7 @@
 
     - name: install pycopy2-binary
       pip:
-        name: pycopg2-binary
+        name: psycopg2
         state: present
 
     - name: Load VMs Initial State from DB
