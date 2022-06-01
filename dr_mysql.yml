@@ -16,6 +16,11 @@
         dir: vars/{{ ambiente }}/{{ sito }}
         depth: 1
 
+    - name: install mysql 
+      pip:
+        name: pymsql
+        state: present
+
     # 
     # Should POST "Start-Up" to other Orchestrators
     #
