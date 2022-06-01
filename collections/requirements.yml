@@ -15,7 +15,7 @@ collections:
   - name: https://github.com/ansible-collections/community.windows.git
     type: git
     version: main
-  - name: https://github.com/ansible-collections/community.mongodb.git
-    type: git
-    version: main
+#  - name: https://github.com/ansible-collections/community.mongodb.git
+#    type: git
+#    version: main
 
