@@ -16,11 +16,6 @@
         dir: vars/{{ ambiente }}/{{ sito }}
         depth: 1
 
-    - name: install mysql 
-      pip:
-        name: pymysql
-        state: present
-
     # 
     # Should POST "Start-Up" to other Orchestrators
     #
@@ -32,10 +27,17 @@
     #    delimiter: '|'
     #  register: vminitial 
 
+    - name: install pycopy2-binary
+      pip:
+        name: pycopg2-binary
+        state: present
+
     - name: Load VMs Initial State from DB
-      community.mysql.mysql_query:
-        login_db: dr
-        login_host: ansible
+      postgresql_query:
+        db: dr
+        login_user: dr
+        login_password: 8volante
+        login_host: 127.0.0.1
         query: select * from vminitial_state
         #ssl_mode: disable
       register: vminitial
