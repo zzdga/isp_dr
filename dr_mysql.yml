@@ -18,7 +18,7 @@
 
     - name: install mysql 
       pip:
-        name: pymsql
+        name: pymysql
         state: present
 
     # 
