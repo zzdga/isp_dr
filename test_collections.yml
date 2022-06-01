@@ -1,0 +1,20 @@
+
+- name: test collections playbook
+  hosts: localhost
+  gather_facts: true
+
+  tasks:
+
+    - name: hostnamectl
+      command: hostnamectl
+      register: h_name
+
+    - debug:
+        var: h_name.stdout
+
+    - name: get collections
+      command: ansible-galaxy collection list
+      register: h_collection
+
+    - debug:
+        var: h_collection.stdout
