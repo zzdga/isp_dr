@@ -3,4 +3,7 @@ collections:
   - name: https://github.com/ansible-collections/community.postgresql
     type: git
     version: main
+  - name: https://github.com/ansible-collections/community.mysql
+    type: git
+    version: main
 

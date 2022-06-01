@@ -28,7 +28,8 @@
     #  register: vminitial 
 
     - name: Load VMs Initial State from DB
-      community.mysql.mysql_query:
+#      community.mysql.mysql_query:
+      mysql_query:
         login_db: dr
         query: select * from vminitial_state
         #ssl_mode: disable
