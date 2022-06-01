@@ -3,6 +3,11 @@
   hosts: localhost
   gather_facts: false
 
+  vars:
+    pip_pkgs:
+      - setuptools
+      - psycopg2
+
   pre_tasks:
 
     - assert:
@@ -27,9 +32,9 @@
     #    delimiter: '|'
     #  register: vminitial 
 
-    - name: install pycopy2-binary
+    - name: install pip packages
       pip:
-        name: psycopg2
+        name: "{{ pip_pkgs }}"
         state: present
 
     - name: Load VMs Initial State from DB
