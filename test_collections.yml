@@ -5,8 +5,8 @@
 
   tasks:
 
-    - name: hostnamectl
-      command: hostnamectl
+    - name: hostname
+      command: hostname
       register: h_name
 
     - debug:
