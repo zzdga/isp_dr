@@ -18,7 +18,23 @@
 
   tasks:
 
-    - name: test URI
+    - name: post URI
+      uri:
+        url: "{{ post_api.uri }}"
+        method: POST
+        user: "{{ post_api.usr }}"
+        password: "{{ post_api.pwd }}"
+        force_basic_auth: yes
+        return_content: yes
+        validate_certs: no
+        body_format: json
+        body: '{"flowUuid":"e0a94276-3693-4695-988e-7c590124ec28"}' 
+      register: postout
+
+    - debug:
+        var: postout
+
+    - name: get URI
       uri:
         url: "{{ rest_api.uri }}"
         method: GET

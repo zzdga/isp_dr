@@ -19,3 +19,8 @@ rest_api:
   pwd: 8Volante!
   uri: https://mfoo.betatest.local:8443/oo/rest/v2/executions/200700033/summary
 
+post_api:
+  usr: admin
+  pwd: 8Volante!
+  uri: https://mfoo.betatest.local:8443/oo/rest/v2/executions
+
