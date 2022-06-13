@@ -35,6 +35,12 @@
     - debug:
         var: postout
 
+    - set_fact:
+         post_result: "{{ postout.json }}"
+
+    - debug:
+        msg: "Post Result: {{ post_result }}"
+
     - name: get URI
       uri:
         url: "{{ rest_api.uri }}"
@@ -49,4 +55,7 @@
 
     - debug:
         var: uri_out
+
+    - debug:
+        msg: "Get Execution ID: {{ uri_get.json.executionId }}"
 
