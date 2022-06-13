@@ -60,5 +60,5 @@
          getout: "{{ uri_out.json | replace('[','') | replace('],','') }}"
 
     - debug:
-        msg: "Get Execution ID: {{ getout.executionId }}"
+        var: getout
 
