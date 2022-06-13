@@ -29,7 +29,7 @@
         validate_certs: no
         body_format: json
         body: '{"flowUuid":"e0a94276-3693-4695-988e-7c590124ec28"}' 
-        status_code: 200
+        status_code: 201
       register: postout
 
     - debug:
