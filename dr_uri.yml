@@ -20,10 +20,10 @@
 
     - name: test URI
       uri:
-        url: "{{ test_api.uri }}"
+        url: "{{ rest_api.uri }}"
         method: GET
-        user: "{{ test_uri.usr }}"
-        password: "{{ test_uri.pwd }}"
+        user: "{{ rest_api.usr }}"
+        password: "{{ rest_api.pwd }}"
         force_basic_auth: yes
         return_content: yes
       register: uri_out
