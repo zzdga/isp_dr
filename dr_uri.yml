@@ -57,5 +57,5 @@
         var: uri_out
 
     - debug:
-        msg: "Get Execution ID: {{ uri_get.json.executionId }}"
+        msg: "Get Execution ID: {{ uri_out.json.executionId }}"
 
