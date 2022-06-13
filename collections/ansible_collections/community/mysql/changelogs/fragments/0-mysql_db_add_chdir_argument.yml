@@ -1,0 +1,2 @@
+minor_changes:
+- mysql_db - add the ``chdir`` argument to avoid failings when a dump file contains relative paths (https://github.com/ansible-collections/community.mysql/issues/395).

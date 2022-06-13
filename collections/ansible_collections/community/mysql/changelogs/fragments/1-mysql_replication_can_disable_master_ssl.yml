@@ -1,0 +1,2 @@
+bugfixes:
+- mysql_replication - when the ``primary_ssl`` argument is set to ``no``, the module will turn off SSL (https://github.com/ansible-collections/community.mysql/issues/393).
