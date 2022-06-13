@@ -32,10 +32,10 @@
     #    delimiter: '|'
     #  register: vminitial 
 
-    - name: install pip packages
-      pip:
-        name: "{{ pip_pkgs }}"
-        state: present
+#    - name: install pip packages
+#      pip:
+#        name: "{{ pip_pkgs }}"
+#        state: present
 
     - name: Load VMs Initial State from DB
       postgresql_query:
