@@ -39,10 +39,10 @@
 
     - name: Load VMs Initial State from DB
       postgresql_query:
-        db: dr
-        login_user: dr
-        login_password: 8volante
-        login_host: 127.0.0.1
+        db: "{{ psql_db }}"
+        login_user: "{{ psql_usr }}"
+        login_password: "{{ psql_pwd }}"
+        login_host: "{{ psql_host }}"
         query: select * from vminitial_state
         #ssl_mode: disable
       register: vminitial

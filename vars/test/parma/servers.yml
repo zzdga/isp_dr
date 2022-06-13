@@ -6,3 +6,8 @@ db_server: db_parma
 windows_servers:
   - 172.16.12.35
 
+psql_db:  dr
+psql_host: ansitower.betatest.local
+psql_usr: dr
+psql_pwd: 8volante
+
