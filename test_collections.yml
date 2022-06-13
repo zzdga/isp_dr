@@ -1,20 +1,26 @@
 
 - name: test collections playbook
   hosts: localhost
+  connection: local
   gather_facts: true
+
+  pre_tasks:
+
+    - assert:
+        that: item is defined
+      with_items:
+        - ambiente
+        - sito
+
+    - name: Loading {{ ambiente }} Environment Settings for Site {{ sito }}
+      include_vars:
+        dir: vars/{{ ambiente }}/{{ sito }}
+        depth: 1
 
   tasks:
 
-    - name: cmd 1
-      command: ls -la && id
-      register: h_name
+    - name: test windows servers
+      ansible.windows.win_command: whoami
+      delegate_to: "{{ item }}"
+      with_items: "{{ windows_servers }}"
 
-    - debug:
-        var: h_name.stdout
-
-    - name: get collections
-      command: ansible-galaxy collection list
-      register: h_collection
-
-    - debug:
-        var: h_collection.stdout
