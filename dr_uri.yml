@@ -26,6 +26,8 @@
         password: "{{ rest_api.pwd }}"
         force_basic_auth: yes
         return_content: yes
+        validate_certs: no
+        body_format: json
       register: uri_out
 
     - debug:
