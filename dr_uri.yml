@@ -57,7 +57,7 @@
         var: uri_out
 
     - set_fact:
-         getout: "{{ uri_out.json | replace('[','') | reaplce('],','') }}"
+         getout: "{{ uri_out.json | replace('[','') | replace('],','') }}"
 
     - debug:
         msg: "Get Execution ID: {{ getout.executionId }}"
