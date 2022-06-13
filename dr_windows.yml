@@ -1,0 +1,27 @@
+
+- name: "ISP {{ ambiente }} Environment DR Switch to {{ sito }} Site"
+  hosts: localhost
+  gather_facts: false
+
+  pre_tasks:
+
+    - assert:
+        that: item is defined
+      with_items:
+        - ambiente
+        - sito
+
+    - name: Loading {{ ambiente }} Environment Settings for Site {{ sito }}
+      include_vars: 
+        dir: vars/{{ ambiente }}/{{ sito }}
+        depth: 1
+
+    - name: test win servers
+      win_command: whoami
+      delegate_to: "{{ item }}"
+      loop: "{{ win_servers }}"
+      register: win_who
+
+    - debug:
+        var: win_who
+

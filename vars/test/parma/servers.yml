@@ -11,3 +11,11 @@ psql_host: ansitower.betatest.local
 psql_usr: dr
 psql_pwd: 8volante
 
+win_servers:
+  - mfoo.betatest.local
+
+rest_api:
+  usr: admin
+  pwd: 8Volante!
+  uri: https://mfoo.betatest.local:8443/oo/rest/v2/executions/200700033/summary
+
