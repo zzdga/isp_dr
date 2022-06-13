@@ -57,7 +57,7 @@
         var: uri_out
 
     - set_fact:
-         getout: "{{ uri_out.json | replace('[','') | replace('],','') }}"
+         getout: "{{ uri_out.json | replace('[','') | replace(']','') }}"
 
     - debug:
         var: getout
