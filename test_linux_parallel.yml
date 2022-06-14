@@ -24,5 +24,6 @@
 
     - name: write files
       shell: date +"%T.%N" > /tmp/ans_test_parallel.txt
-      when: inventory_hostname == 'omlbgt.betatest.local' or inventory_hostname == 'omlagt.betatest.local'
+      when: inventory_hostname in linux_servers
+      #when: inventory_hostname == 'omlbgt.betatest.local' or inventory_hostname == 'omlagt.betatest.local'
 
