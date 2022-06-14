@@ -1,0 +1,13 @@
+
+[ans_servers]
+ansitower.betatest.local
+ansible.betatest.local
+
+[windows_servers]
+mfoo.betatest.local
+
+[linux_servers]
+omlbgt.betatest.local
+omlagt.betatest.local
+
+

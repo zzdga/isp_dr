@@ -22,6 +22,12 @@
 
   tasks:
 
+    - debug:
+        var: linux_servers
+
+    - debug:
+        var: windows_servers
+
     - name: write linux files
       shell: date +"%T.%N" > /tmp/ans_test_parallel.txt
       when: inventory_hostname in linux_servers
@@ -29,3 +35,4 @@
     - name: run windows command
       win_command: whoami
       when: inventory_hostname in windows_servers
+
