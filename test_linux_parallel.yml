@@ -1,1 +1,30 @@
 
+- name: "Environment: {{ ambiente }} Site: {{ sito }}"
+  hosts: all
+  gather_facts: false
+
+  pre_tasks:
+
+    - assert:
+        that: item is defined
+      with_items:
+        - ambiente
+        - sito
+      run_once: true
+      delegate_to: localhost
+
+    - name: Loading {{ ambiente }} Environment Settings for Site {{ sito }}
+      include_vars: 
+        dir: vars/{{ ambiente }}/{{ sito }}
+        depth: 1
+      run_once: true
+      delegate_to: localhost
+
+  tasks:
+
+    - name: write files
+      shell: date +"%T.%N" > /tmp/ans_test_parallel.txt
+      async: 10
+      poll: 5
+      when: inventory_hostname in linux_servers
+
