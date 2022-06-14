@@ -1,7 +1,6 @@
 
 - name: "ISP {{ ambiente }} Environment DR Switch to {{ sito }} Site - test parallel"
-  hosts: localhost
-  serial: 10
+  hosts: all
   gather_facts: false
 
   pre_tasks:
@@ -16,6 +15,7 @@
       include_vars: 
         dir: vars/{{ ambiente }}/{{ sito }}
         depth: 1
+      delegate_to: localhost
 
   tasks:
 
