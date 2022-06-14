@@ -10,17 +10,19 @@
       with_items:
         - ambiente
         - sito
+      delegate_to: localhost
+      run_once: true
 
     - name: Loading {{ ambiente }} Environment Settings for Site {{ sito }}
       include_vars: 
         dir: vars/{{ ambiente }}/{{ sito }}
         depth: 1
       delegate_to: localhost
+      run_once: true
 
   tasks:
 
     - name: write files
       shell: date +"%T.%N" > /tmp/ans_test_parallel.txt
-      delegate_to: "{{ item }}"
-      loop: "{{ linux_servers }}"
+      when: inventory_hostname == 'omlbgt.betatest.local' or inventory_hostname == 'omlagt.betatest.local'
 
