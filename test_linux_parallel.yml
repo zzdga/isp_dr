@@ -1,6 +1,7 @@
 
 - name: "ISP {{ ambiente }} Environment DR Switch to {{ sito }} Site - test parallel"
   hosts: localhost
+  serial: 10
   gather_facts: false
 
   pre_tasks:
