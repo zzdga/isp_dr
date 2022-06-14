@@ -1,0 +1,25 @@
+
+- name: "ISP {{ ambiente }} Environment DR Switch to {{ sito }} Site - test parallel"
+  hosts: localhost
+  gather_facts: false
+
+  pre_tasks:
+
+    - assert:
+        that: item is defined
+      with_items:
+        - ambiente
+        - sito
+
+    - name: Loading {{ ambiente }} Environment Settings for Site {{ sito }}
+      include_vars: 
+        dir: vars/{{ ambiente }}/{{ sito }}
+        depth: 1
+
+  tasks:
+
+    - name: write files
+      shell: date +"%T.%N" > /tmp/ans_test_parallel.txt
+      delegate_to: "{{ item }}"
+      loop: "{{ linux_servers }}"
+
