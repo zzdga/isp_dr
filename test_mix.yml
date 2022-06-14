@@ -27,4 +27,5 @@
       when: inventory_hostname in linux_servers
 
     - name: run windows command
+      win_command: whoami
       when: inventory_hostname in windows_servers
