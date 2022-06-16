@@ -23,7 +23,7 @@
   tasks:
 
     - name: write files
-      shell: date +"%T.%N" > /tmp/ans_test_parallel.txt
+      shell: date +"%T.%N" > /tmp/ans_test_parallel.txt && sleep 300
 #      async: 10
 #      poll: 5
       when: inventory_hostname in linux_servers
