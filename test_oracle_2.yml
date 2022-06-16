@@ -47,6 +47,7 @@
       delegate_to: "{{ oracle_server }}"
 
     - name: run sqlplus command
+      no_log: true
       become: true
       become_user: oracle
       become_method: su
