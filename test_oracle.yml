@@ -49,5 +49,5 @@
 
     - debug: 
         var: sqlout
-      when: sqlout is defoned and inventory_hostname in oracle_servers
+      when: sqlout is defined and inventory_hostname in oracle_servers
 
