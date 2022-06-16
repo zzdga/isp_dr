@@ -1,0 +1,51 @@
+
+- name: "Environment: {{ ambiente }}   Site: {{ sito }}"
+  hosts: all
+  gather_facts: false
+
+  pre_tasks:
+
+    - assert:
+        that: item is defined
+      with_items:
+        - ambiente
+        - sito
+      run_once: true
+      delegate_to: localhost
+
+    - name: Loading {{ ambiente }} Environment Settings for Site {{ sito }}
+      include_vars: 
+        dir: vars/{{ ambiente }}/{{ sito }}
+        depth: 1
+      run_once: true
+      delegate_to: localhost
+
+  tasks:
+
+    - debug:
+        var: oracle_servers
+
+    - copy:
+        content:
+          set markup csv on
+          set heading off
+          set pagesize 0
+          set feedback off
+          set null 'missing'
+          select h_name,h_ip from hosts;
+          exit;
+        dest: /tmp/run_query.sql
+        owner: oracle
+        group: oinstall
+
+    - name: run sqlplus command
+      become: true
+      become_user: oracle
+      shell: sqlplus {{ ora_usr }}/{{ ora_pwd }}@{{ ora_sid }} @/tmp/run_query.sql
+      register: sqlout
+      when: inventory_hostname in oracle_servers
+
+    - debug: 
+        var: sqlout
+      when: sqlout is defoned
+
