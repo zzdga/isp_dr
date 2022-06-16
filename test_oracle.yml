@@ -20,6 +20,18 @@
       run_once: true
       delegate_to: localhost
 
+    - vars:
+        my_query: |
+          set markup csv on
+          set heading off
+          set pagesize 0
+          set feedback off
+          set null 'missing'
+          select h_name,h_ip from hosts;
+          exit;
+      run_once: true
+      delegate_to: localhost
+
   tasks:
 
     - debug:
@@ -27,14 +39,7 @@
       when: inventory_hostname in oracle_servers
 
     - copy:
-        content:
-          set markup csv on\n
-          set heading off\n
-          set pagesize 0\n
-          set feedback off\n
-          set null 'missing'\n
-          select h_name,h_ip from hosts;\n
-          exit;\n
+        content: "{{ my_query }}"
         dest: /tmp/run_query.sql
         owner: oracle
         group: oinstall
