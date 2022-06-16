@@ -41,8 +41,7 @@
       when: inventory_hostname in oracle_servers
 
     - name: run sqlplus command
-      become: true
-      become_user: oracle
+      remote_user: oracle
       shell: . ./.bash_profile && sqlplus -s {{ ora_usr }}/{{ ora_pwd }}@{{ ora_sid }} @/tmp/run_query.sql
       register: sqlout
       when: inventory_hostname in oracle_servers
