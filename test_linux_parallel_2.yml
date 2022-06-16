@@ -23,9 +23,9 @@
   tasks:
 
     - name: write files
-      shell: date +"%T.%N" > /tmp/ans_test_parallel_2.txt && sleep 300 && date +"%T.%N" >> /tmp/ans_test_parallel_2.txt
-#      async: 50
-#      poll: 10
+      shell: date +"%T.%N" > /tmp/ans_test_parallel_2.txt && sleep 120 && date +"%T.%N" >> /tmp/ans_test_parallel_2.txt
+      async: 50
+      poll: 10
       delegate_to: "{{ item }}"
       loop: "{{ linux_servers }}"
 
