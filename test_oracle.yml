@@ -24,6 +24,7 @@
 
     - debug:
         var: oracle_servers
+      when: inventory_hostname in oracle_servers
 
     - copy:
         content:
@@ -37,6 +38,7 @@
         dest: /tmp/run_query.sql
         owner: oracle
         group: oinstall
+      when: inventory_hostname in oracle_servers
 
     - name: run sqlplus command
       become: true
@@ -47,5 +49,5 @@
 
     - debug: 
         var: sqlout
-      when: sqlout is defoned
+      when: sqlout is defoned and inventory_hostname in oracle_servers
 
