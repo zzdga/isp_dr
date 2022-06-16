@@ -46,7 +46,7 @@
       become_method: su
       #remote_user: oracle
       #shell: pwd && id
-      shell: sqlplus -s {{ ora_usr }}/{{ ora_pwd }}@{{ ora_sid }} @/tmp/run_query.sql
+      shell: cd && . .bash_profile && sqlplus -s {{ ora_usr }}/{{ ora_pwd }}@{{ ora_sid }} @/tmp/run_query.sql
       register: sqlout
       when: inventory_hostname in oracle_servers
 
