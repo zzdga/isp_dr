@@ -1,0 +1,22 @@
+
+- name: polaybook 1
+  hosts: localhost
+  tasks:
+
+    - 
+
+    -
+
+    -
+
+
+- name: playbook 2 linux servers
+  hosts: linux_servers
+
+  task:
+   
+    - name: create file
+
+- name: playbook windows
+  hosts: windows_servers
+

@@ -1,0 +1,42 @@
+
+- name: "Environment: {{ ambiente }}   Site: {{ sito }}"
+  hosts: all
+  gather_facts: false
+
+  pre_tasks:
+
+    - assert:
+        that: item is defined
+      with_items:
+        - ambiente
+        - sito
+      run_once: true
+      delegate_to: localhost
+
+    - name: Loading {{ ambiente }} Environment Settings for Site {{ sito }}
+      include_vars: 
+        dir: vars/{{ ambiente }}/{{ sito }}
+        depth: 1
+      run_once: true
+      delegate_to: localhost
+
+  tasks:
+
+    - debug:
+        var: mssql_servers
+
+    - name: Set some values in the test db
+      community.general.odbc:
+        dsn: "DRIVER={ODBC Driver 13 for SQL Server};Server=mfoo.betatest.local;Database=WPDR0_DR2H_COLLAUDO;UID=WPDR0_TMC;PWD=WPDR0_TMC;"
+        query: "Select * from DR2H_RIPARTENZA_COLLAUDO_DR_TOvsPR"
+# where column1 = ?"
+#        params:
+#          - "value1"
+        commit: false
+#      changed_when: no
+      register: sqlout
+
+    - debug: 
+        var: sqlout
+      when: sqlout is defined and inventory_hostname in oracle_servers
+

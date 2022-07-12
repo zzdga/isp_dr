@@ -1,0 +1,29 @@
+
+- name: Playbook for DR roles
+  hosts: all
+
+  pre_tasks:
+
+    - assert:
+        that: item is defined
+      with_items:
+        - ambiente
+        - sito
+      run_once: true
+      delegate_to: localhost
+
+    - name: Loading {{ ambiente }} Environment Settings for Site {{ sito }}
+      include_vars:
+        dir: vars/{{ ambiente }}/{{ sito }}
+        depth: 1
+      run_once: true
+      delegate_to: localhost
+
+  roles:
+
+    - role: sql_query
+      vars:
+        sql_table: "{{ sql_table }}"
+        sql_fields: "*"
+      when: inventory_hostname == sql_server
+

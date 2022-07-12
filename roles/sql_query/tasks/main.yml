@@ -1,0 +1,14 @@
+---
+
+- name: ensure query_cmd
+  assert:
+    that: query_cmd is defined
+
+- name: run query_cmd
+  communty.general.odbc:
+    dsn: "DRIVER={ODBC Driver 13 for SQL Server};Server={{ sql_server }};Database={{ sql_db }};UID={{ sql_usr }};PWD={{ sql_pwd }};"
+    query: select {{ query_fields }} from {{ query_table }};
+  register: query_result
+
+- debug:
+    var: query_result
