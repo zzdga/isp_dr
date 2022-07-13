@@ -1,9 +1,9 @@
 ---
 collections:
-#  - name: https://github.com/ansible-collections/community.postgresql
-#    type: git
-#    version: main
-  - name: https://github.com/ansible-collections/community.mysql
+  - name: git+https://github.com/ansible-collections/community.postgresql
+    type: git
+    version: main
+  - name: git+https://github.com/ansible-collections/community.mysql
     type: git
     version: main
 #  - name: https://github.com/ari-stark/ansible-oracle-modules.git
@@ -12,7 +12,7 @@ collections:
 #  - name: https://github.com/Cyberitas/ansible-role-sqlserver.git
 #    type: git
 #    version: main
-  - name: https://github.com/ansible-collections/community.windows.git
+  - name: git+https://github.com/ansible-collections/community.windows.git
     type: git
     version: main
 #  - name: https://github.com/ansible-collections/community.mongodb.git
