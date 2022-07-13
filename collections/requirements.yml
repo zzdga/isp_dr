@@ -9,13 +9,13 @@ collections:
 #  - name: https://github.com/ari-stark/ansible-oracle-modules.git
 #    type: git
 #    version: main
-  - name: https://github.com/Cyberitas/ansible-role-sqlserver.git
-    type: git
-    version: main
+#  - name: https://github.com/Cyberitas/ansible-role-sqlserver.git
+#    type: git
+#    version: main
   - name: https://github.com/ansible-collections/community.windows.git
     type: git
     version: main
-  - name: https://github.com/ansible-collections/community.mongodb.git
-    type: git
-    version: main
+#  - name: https://github.com/ansible-collections/community.mongodb.git
+#    type: git
+#    version: main
 
