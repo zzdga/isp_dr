@@ -1,26 +1,18 @@
 
 - name: test collections playbook
   hosts: localhost
+  collections:
+    - community.mysql
   connection: local
   gather_facts: true
 
-  pre_tasks:
-
-    - assert:
-        that: item is defined
-      with_items:
-        - ambiente
-        - sito
-
-    - name: Loading {{ ambiente }} Environment Settings for Site {{ sito }}
-      include_vars:
-        dir: vars/{{ ambiente }}/{{ sito }}
-        depth: 1
-
   tasks:
 
-    - name: test windows servers
-      ansible.windows.win_command: whoami
-      delegate_to: "{{ item }}"
-      with_items: "{{ windows_servers }}"
+    - name: test mysql collection
+      community.mysql.mysql_query:
+        login_db: prova
+        query: select * from hosts
+      delegate_to: localhost
+      run_once: true
+      ignore_errors: true
 
