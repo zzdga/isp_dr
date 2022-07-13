@@ -56,7 +56,9 @@
 #     when: inventory_hostname in oracle_servers
 
     - name: query database
-      oracle_sql:
+      delegate_to: localhost
+      run_once: true
+      ari_stark.ansible_oracle_modules.oracle_sql:
         hostname: "oradb19c.betatest.local"
         username: "mgmt"
         password: "8volante"
