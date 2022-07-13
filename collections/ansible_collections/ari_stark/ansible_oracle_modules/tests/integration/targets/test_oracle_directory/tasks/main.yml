@@ -1,0 +1,76 @@
+---
+- name: "define connection parameters"
+  set_fact:
+    connection_parameters: &con_param
+      service_name: "{{ service_name }}"
+      username: "SYS"
+      password: "{{ sys_password }}"
+      mode: "sysdba"
+
+- name: 'would create ?'
+  oracle_directory:
+    <<: *con_param
+    directory_name: 'FOO'
+    directory_path: '/tmp'
+  check_mode: yes
+  register: _
+  failed_when: _.changed == false
+
+- name: 'create'
+  oracle_directory:
+    <<: *con_param
+    directory_name: 'FOO'
+    directory_path: '/tmp'
+  register: _
+  failed_when: _.changed == false
+
+- name: 'no creation and no replacement'
+  oracle_directory:
+    <<: *con_param
+    directory_name: 'FOO'
+    directory_path: '/tmp'
+  register: _
+  failed_when: _.changed == true
+
+- name: 'would replace ?'
+  oracle_directory:
+    <<: *con_param
+    directory_name: 'FOO'
+    directory_path: '/tmptmp'
+  check_mode: yes
+  register: _
+  failed_when: _.changed == false
+
+- name: 'replace'
+  oracle_directory:
+    <<: *con_param
+    directory_name: 'FOO'
+    directory_path: '/tmptmp'
+  register: _
+  failed_when: _.changed == false
+
+- name: 'would drop ?'
+  oracle_directory:
+    <<: *con_param
+    state: absent
+    directory_name: 'FOO'
+  check_mode: true
+  register: _
+  failed_when: _.changed == false
+
+- name: 'drop'
+  oracle_directory:
+    <<: *con_param
+    state: absent
+    directory_name: 'FOO'
+  register: _
+  failed_when: _.changed == false
+
+- name: 'absent and no change'
+  oracle_directory:
+    <<: *con_param
+    state: absent
+    directory_name: 'FOO'
+  register: _
+  failed_when: _.changed == true
+...

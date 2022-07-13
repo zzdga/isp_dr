@@ -1,0 +1,1125 @@
+{
+ "files": [
+  {
+   "name": ".",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/unit",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/unit/plugins",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/unit/plugins/module_utils",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/unit/plugins/module_utils/test_ora_object.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "86a21c7a6d9f1e8d73fcc124511fc304177495a2d4aa8d301233b34a6a463638",
+   "format": 1
+  },
+  {
+   "name": "tests/integration",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/setup",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/setup/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/setup/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b743e431a470cdfb74ffccecdf63f5c04a72e97327bf6ebab360caf05cfad101",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_quota",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_quota/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_quota/tasks/set_up.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "01a38f1a68fa8da4b73161d98f8e87cb2c8b6b876e1f1ba5f1e206fd43e3e3dc",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_quota/tasks/tear_down.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "c766df1e73f5d541497068c77c119a8c4c082c24c8db16e91067e7f9d564f86f",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_quota/tasks/check_unlimited.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "a1d53c62ffeed374049e1ca0663398311384feaf5bbee3c47af32bcb2929816a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_quota/tasks/ensure_no_quota.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "a561f5c31c85182791af417386496685e915832c5f772ba4f109011f470b0fef",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_quota/tasks/ensure_same.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "80a352990bd976d54e1db2996da314dd9268ea75a484674784e0cf7fc314bdc5",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_quota/tasks/check_parameters.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "6570a3217780c844f683e4bf95f1af8428a21b719d85614f154d57cc143928dd",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_quota/tasks/ensure_present.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "46f8f858c2b4f09c1822e8263c866b39af3da82d6aa2512f56181b720b69b2c3",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_quota/tasks/ensure_absent.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "46abfa74765fff0f1f94b00059a02ca82920996cfcd069afa0d0aedf49da3f2c",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_quota/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "d862431014b5ce8b217caf40ff491a84635437223f514a002a16c8cee9735a3e",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_quota/defaults",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_quota/defaults/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "fb0c1a644da5658fa52b5e9496625986afcf9c8e1abe9e431314eeb84a02a49e",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_parameter",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_parameter/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_parameter/tasks/parameters_modification.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e002e82db3c8d3804eb2e8320d2de8c592a29e360f2d88c9d80ff25eac1796c0",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_parameter/tasks/no_sysdba.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e1aed9f1a3e4d5e2eac04b7466224a348725a001ab8e91a0cc2d02ba5168d420",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_parameter/tasks/parameters_reset.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b7e7eb01630ffadd3fc12166927b9c4e4d70f21dabb53f5206ea8d5b29ff4087",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_parameter/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "ea6a27e8840136b6066ec8d0da7cad089a4935ef149096c33c6d9779b0e18747",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_parameter/defaults",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_parameter/defaults/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "856a57224e0d57d264dfda97bb59612a8e0067713aef57734e9d18ea1b287c67",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_tablespace",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_tablespace/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_tablespace/tasks/create_same.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "c80cd11676761cf3ded53bee389f832d3ccd09ae2e2c67ca62f5c2bda6517fe3",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_tablespace/tasks/drop_check_mode.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "60163519a478133c527ab14ce9f79f1cdbbacf8e731de11933d306a0721d623d",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_tablespace/tasks/create_drop.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "3bd5d49d717a63a0a561ee647c45c6860b923f8a55ff9c7e91536ab5cd18239a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_tablespace/tasks/define_default.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9f7b6cbba15658c1c9f5975e021228eecd808a69cd4f31d85a79238b41a08809",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_tablespace/tasks/create_several_datafiles.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b776c2ad8e3335d16b377b8de3976e46589402957a49c2c17a44a9751ea90f6d",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_tablespace/tasks/error.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "53abb8f88f288bc44aaa7b568a211131b7cca042c33b058f1fc9d4c8d18663db",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_tablespace/tasks/modify.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "d32587b4071e610deceeeea35308d1a54fc8cf809dd96abe02d32911d1c447be",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_tablespace/tasks/create_check_mode.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "cfb8eb2f64484cd320b0aff41ade372de89393ddead7cdbece2533edae2528fe",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_tablespace/tasks/null.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "5403afb3deacd9b7c00c608de367bbd2b1f5cf5e67882a31605bceb5148e39ae",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_tablespace/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "a600e80b5d3ba31c3e80a252837c801f49f7cdef9a29a0bea34905293a282d55",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_tablespace/defaults",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_tablespace/defaults/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f90e91f1e7c91eb0ed627539e8edbca823a77d007029dd109757e40328957608",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_sql",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_sql/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_sql/tasks/ddl.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "6f140a0c6ef58757ece3c9746803c4f79d8af06503196d01b355030ff3353a58",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_sql/tasks/dbms_output.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f74a4762ba13f935a2814be81c34da86e4150fe77fcfe19b97d762a81b902bd2",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_sql/tasks/plsql_block.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "6cd2f1fe9f1c823234bf84050f1f281d93e566dd3fb099ea67d69b8c127da42e",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_sql/tasks/sql_file.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b5f91e756ce43566c5275fbdcf5dca693a6308a5574649a9a77d54a9dee8fba5",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_sql/tasks/special_cases.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "4c5e41cbe1a846eedea87b5293656572b2c01b64dbcda603c96a421dc6f79578",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_sql/tasks/check_mode.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e63643f07ce5dca103d5dfa8a4f6bd493a9762ccd6c1d0c74880124db3d987fc",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_sql/tasks/select.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "de2cb476b2bf428577f838b6400bd8bc6d8c1e5892d7b3f31ad4a0627dde1efe",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_sql/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "86db9b1906789c6b40c5c8abf6f3e6f9c19bf1be1fcd055aa1156f228bb6dfde",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_sql/files",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_sql/files/sql_file_test.sql",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "d67794f793c1e2ec60a4a68ca713aca9273c49c571b32563fa324d76f03a2794",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_sql/defaults",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_sql/defaults/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "85e6e10e925ea0ecb07e94bea90b1c115e8b90b4e2d8ad7f71c526df984b64fa",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_pdb",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_pdb/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_pdb/tasks/exclusive_options.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "2fa95262b38bfb6cdc0ecffdb8ddbabe47df7ef42afd2ee19356b23633192af5",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_pdb/tasks/create_delete.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "4191415ac21ab151d54ecaac8a0190c6d4214bcf30d6845244b6f07f91b5d907",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_pdb/tasks/existence.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "63a7060069ea56ccc7368eaf26404caa7f2621ebc2b6c938007b7fb102aad38b",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_pdb/tasks/clone.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b9316dd7a2f2c833caba417419c9edcf9db540562c121bbdf6b989f2f1dca969",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_pdb/tasks/unplug_plug.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e4bdcc21024c60aeef0804d3926ce8e83ef964ee76f1ad458daad36b642de04a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_pdb/tasks/open_close.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "ae61db29a505da9a348f3bcb47dcf1721d9a6bf055717736f91528610af35cd6",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_pdb/tasks/check_mode.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "34454a2a17c9addd80b910caff5a4da3bc0f851aaa1be5e937c1601f4e879fb9",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_pdb/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "058ba24c49834b81a2589a594aaaeaf470e8a1ff3898684cbe0d145a9e10d7a5",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_pdb/defaults",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_pdb/defaults/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "01e6977d1a33aee990a76580fa173e10e857c17b8e47a21bae76c268b1e2e9ff",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_facts",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_facts/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_facts/tasks/subset_content.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "485c7c80aa7ef9f0fdc39a971b3f7c32033fb30a48a8e4bde881d2405b46a1dd",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_facts/tasks/no_sysdba.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "28c94270a0f96fa8907ab19cb4a134aa7ac3f9b491c2247a5cdf4fb785fa1b62",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_facts/tasks/compile.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f8354ea2b873c36c22efe1e20339519591e326d3919e2c845080fd0d1f3dd59a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_facts/tasks/subset_parameter.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "7fcbede6f62826b33d4dc1e7c9580ac0142c3474745c2e90d17671708168917b",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_facts/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "c62cce4adea34b374cabe50c621c24ec8cbd9b77b15565a34df9a26fd75fb06a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_facts/defaults",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_facts/defaults/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "bea5490b9f863e66b9d6197be7db3cd990162bfbe9c984fee876dea5761077d2",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_grant",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_grant/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_grant/tasks/append_remove_directory_privileges.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "7df02bcea27b215d2203b2a4edcd10cd6a5ba35a6a9c1329cb9bd4d2df9b9e94",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_grant/tasks/set_up.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e72360e59629dbd9422c207fa53d07ded7b838a883523c4e3ca01b6dd00571e5",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_grant/tasks/remove_system_privileges.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "06fcb18907cbcdda4505b92091d3846dcb9d72927e2d1bdeab1c2cc55ec8b00c",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_grant/tasks/replace_object_privileges.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "67dbe0d6839ccfd4d16ee2066cea49170f6a7758d091e717f4617ba7b317855d",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_grant/tasks/remove_object_privileges.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9efef0b5f4b2a8634fc541afeb4e66facea430067c9b152372a5daa9bb8ff40e",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_grant/tasks/tear_down.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "ed68763b77c32fd6b40491a03f4030d63366011fdb1312c61861540c71efc45b",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_grant/tasks/append_system_privileges.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "3896225425532f455961aa3fdba1336ed67c05dedfaf41e859bef2830316cd0a",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_grant/tasks/append_object_privileges.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "a10734fb85d6af3dd7a738b586c8432a909fb32dd8bf1a40d0c2bc55f72f6c78",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_grant/tasks/append_remove_privileges_role.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "d6afb0618ea453ced6a3a6b8102ef01c9147bca5f63ac3d69c8f67b138bd27de",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_grant/tasks/check_mode.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "ce7f77c58889b066dee074304791f14a3ced6739dfbe2e3a21866d2a81bb7a41",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_grant/tasks/replace_system_privileges.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "127bf5996e9bdfd35c1615bce35ba6fc59b65420cd64f8cf4cd951cbd294e166",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_grant/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "560b9f4d2d9828a9eb3d7c9a3fadf698ac08d21b6d7cb61d93334e98596c4a36",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_grant/defaults",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_grant/defaults/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f90e91f1e7c91eb0ed627539e8edbca823a77d007029dd109757e40328957608",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_role",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_role/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_role/tasks/every_identified_method.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "fb8a98a03a1113654660a5c5ce47ae8c3aad95f51ac7b49e61c4a3b1e480ed98",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_role/tasks/create_delete.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "70fac7b09d8677d4857b2708825727ad336c8a33bca17f92b7dfad31ea89c03e",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_role/tasks/parameter.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "1d7efb482b012b3be7289de70b36cf9326ad55a147fe1e3cb278d6153795a6a0",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_role/tasks/check_mode.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "ac1191a5ecf28b5861b2e3e7359f3e7a6cd2ecf162063f0c7159fd6d3b8b6672",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_role/tasks/change_identified_method.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "1695a88776f5adfce8f952f994f55b8e424c93e08afcd61c1c92e2d041b77af8",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_role/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "c2913f343ec4b283be15b22968c9d9b050a4551b00ae81d619264726ca28399e",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_role/defaults",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_role/defaults/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f90e91f1e7c91eb0ed627539e8edbca823a77d007029dd109757e40328957608",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_directory",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_directory/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_directory/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "76e9643e1040e06b2820039ea55b72e7534fd90118e304cf64527cf60db808b3",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_directory/defaults",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_directory/defaults/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "2c96d75e3116bf76383390c0ed64e19de5884cbcc0f0a70b4551b6ee5fc39aa9",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_user",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_user/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_user/tasks/diff_mode.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "4fc2dec8bfb67c1f8a80a00798355cb6898b0fb7237f9d40227e7aa139e95422",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_user/tasks/empty_user.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "11d6b069a2d6ce66a5bd96671c2b806aaf229c7b2f94595b965f1fd4b3efab08",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_user/tasks/delete_user.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "516ac2496b1fb2150871ab39040366a8767939645b0754bb157bed406c004447",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_user/tasks/modify_user.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "d30915250bdda49c3c4557b97937bb74bd7bb3f34b42acd21635925b43a0aaea",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_user/tasks/check_mode.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "a6c83ee5d3d3b6d2c75508ba38d5b784b0aa84838e53cf7eab7d47f95757f944",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_user/tasks/create_user.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "4225bde5a034f71a6da093092bee77d45ff6f8bf3f5322023e4d72e563171f29",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_user/tasks/change_state.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "264eb4d3700344ffb7dc880bee2c359b64899f3babf3db6168f41840de324d96",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_user/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "538fc9cf1a64f9f31c0ad5b8664f1bad8eedba8855f55d4c71936e8579a96c06",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_user/defaults",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/test_oracle_user/defaults/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f90e91f1e7c91eb0ed627539e8edbca823a77d007029dd109757e40328957608",
+   "format": 1
+  },
+  {
+   "name": "README.md",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "28cfb2a324a2a95588c94c3a985b688105cbb6641833f418fd8379e4cc6e8ee1",
+   "format": 1
+  },
+  {
+   "name": "LICENSE",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "31f30875ae07bd40687b5ce27b08e1ff25cf0013dbb7b7fa176669ed5b050a9f",
+   "format": 1
+  },
+  {
+   "name": "CHANGELOG.md",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "a1589c4887919006f7e144367b63a5d901f9fab0a41064ffdc14b1bb5ccae18f",
+   "format": 1
+  },
+  {
+   "name": "plugins",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/modules",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_job.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9fa513429049cb4b636b7c3d5c2cf9c7a75f01cf9f2daaf47bc137b6db47726c",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_tablespace.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f96a58120afca5c3c0809552fde56434f96febd32baa8516d5869f73a02c2428",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_directory.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "fbf3ad99f86e434c6f7e443efa5fa1039bb49f0026b5c8e05a434995317c2cf9",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_profile.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "dc6e1d0631b28090c0844546e27147d732f5f42e56a108deff4c63459598f009",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_stats_prefs.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "3b8be46b0d0d51fd89e720c5a9c0484ee62509c8cf4f6ad51effea6bfac10e61",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_jobschedule.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f4ed14d1f172ab0b81580b39de3fef03196382db578c4f98c1ea79f41c387829",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_jobclass.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "1f4bf101529dddf9a66c8f9a93fc247419892c709c6bbd80e234bd78d0f89c26",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_opatch.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "ae30870e1523c15fea818d16d0fb64b11bac9a03182a484c39b3b328b8a02ebb",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_asmdg.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "eefec7cd70601bd70edef4b85be4d4586321045f192188006fc7a54b1aae0745",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_role.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "1c8565740b57ee97f5c568f1cd9d682f7683f30bbc3b0023be9dcbb33a66da45",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_quota.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "46490a37af1329c6b846f1acff4d426531e4ef5e33dd1919a1c6d182ebe25130",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_redo.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "7e886f4c8d069ad1bd7fb08151accf37adc8287b654cfac1d78c3d0c5987db29",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_awr.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b8afb51bc28ad11b1f0063acd28f3c411c10d1f7fe8e37f4aeaf4b1c68551b75",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_sql.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "216f8ab445ad382c47f5dcb893eab1ab7c54f76746c41b128344fb97ec577517",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_grant.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "a40ea4d3c81ea86ff689905b9381fe32a19c70e4314c4f1e15acfc9a563a2656",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_db.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8bf85d125a8a5a5a8a2a524c1708df4d3e46bd351d70a704daaf9aa03f9f2443",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_rsrc_consgroup.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "afe992d48327ffe6ff4e9c7ff04d02de3f1286dcd7a328f99777cdc9a6f402bd",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_jobwindow.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "c9ed4f035cb4fb3b027e3051ce70384254002508c29b3813ce6a801c238f7cb4",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_gi_facts.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e05d96161a4004398fb02dc7f82cd51003e084156138166eddecdf36ae746711",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_ldapuser.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "d7aa3de61628c907d342b4e8c0039adb795187e277924ae5cc4a9c253cbe8019",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_facts.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "52ceef33e995c18a2d29a3b8aa99d87b2528e90b91a1c4139417c5b82021ce16",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_user.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e21c33522b7df3643b59dcab3433ca2b04ac447515b0ce80073d40d8a8c12f1b",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_asmvol.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "720c5d1ee6ab382caebe04c50e2c313833dc81fa2cc44d496676e7e00ed8779d",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_datapatch.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e8d0a6fed70745f80ad3cece438e8fd78a58371e03baad6e80f5f2d0d21d1533",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_pdb.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "ced4c20dfdb8d6289861f74d6265dd48e5abc15f081c749841a8b9458cd14e04",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_parameter.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "df068c1616b3686dd84c1d1b855b06165871af4a5c3b5fd95afaf992c5e9270b",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/oracle_services.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "45d422d6d8705caf6efa77356b6e9d70c23f6dea042bfcb53952eee3e8e6f3f5",
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils/ora_db.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "ef011ae91fe6da0fed20cd1e6dd668fa511e4e31f8cf0f188d663ace9482d20e",
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils/ora_object.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "cb58db4dba45df17df367ed49844542ac7eba159130b2141900227eec8074e08",
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils/__init__.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "format": 1
+  }
+ ],
+ "format": 1
+}

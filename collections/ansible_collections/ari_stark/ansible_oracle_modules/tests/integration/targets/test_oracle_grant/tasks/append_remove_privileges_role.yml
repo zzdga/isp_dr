@@ -1,0 +1,32 @@
+---
+- name: "define connection parameters"
+  set_fact:
+    connection_parameters: &con_param
+      service_name: "{{ service_name }}"
+      username: "SYS"
+      password: "{{ sys_password }}"
+      mode: "sysdba"
+
+- name: grant to role
+  oracle_grant:
+    <<: *con_param
+    grantee: "r_foo"
+    privileges: "create session"
+    objects_privileges:
+      dbms_random:
+        - "execute"
+
+- name: grant something different to role
+  oracle_grant:
+    <<: *con_param
+    grantee: "r_foo"
+    privileges: "create table"
+    objects_privileges:
+      dba_users:
+        - "read"
+
+- name: reset role's privilege
+  oracle_grant:
+    <<: *con_param
+    grantee: "r_foo"
+...

@@ -1,0 +1,23 @@
+---
+- name: define connection parameters
+  set_fact:
+    sys_connection_parameters: &sys_con_param
+      service_name: "{{ service_name }}"
+      username: "SYS"
+      password: "{{ sys_password }}"
+      mode: "sysdba"
+
+- name: prepare test
+  oracle_sql:
+    <<: *sys_con_param
+    script: "@{{ role_path }}/files/sql_file_test.sql"
+  register: _
+  failed_when: _.failed or _.statements | length != 2
+
+- name: execute inexistent SQL file
+  oracle_sql:
+    <<: *sys_con_param
+    script: "@{{ role_path }}/files/inexistent.sql"
+  register: _
+  failed_when: not _.failed
+...

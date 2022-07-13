@@ -1,0 +1,23 @@
+---
+- name: "define connection parameters"
+  set_fact:
+    connection_parameters: &con_param
+      service_name: "{{ service_name }}"
+      username: "SYS"
+      password: "{{ sys_password }}"
+      mode: "sysdba"
+
+- name: create a PDB from seed, XML and clone
+  oracle_pdb:
+    <<: *con_param
+    pdb_name: "XEPDB2"
+    state: "opened"
+    pdb_admin_username: "foo"
+    pdb_admin_password: "bar"
+    clone_from: "XEPDB1"
+    plug_file: "/tmp/xepdb2.xml"
+    file_name_convert:
+      "/opt/oracle/oradata/XE/pdbseed": "/tmp/xepdb2/dbf01"
+  register: _
+  failed_when: not _.failed
+...

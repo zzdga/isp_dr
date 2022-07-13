@@ -1,0 +1,49 @@
+---
+- name: "define connection parameters"
+  set_fact:
+    connection_parameters: &con_param
+      service_name: "{{ service_name }}"
+      username: "SYS"
+      password: "{{ sys_password }}"
+      mode: "sysdba"
+
+- name: "user creation with check mode (change)"
+  oracle_user:
+    <<: *con_param
+    schema_name: "foo"
+    schema_password: "pass"
+    state: "present"
+  check_mode: yes
+  register: _
+  failed_when: _.failed or not _.changed
+
+- name: "user creation without check mode (change)"
+  oracle_user:
+    <<: *con_param
+    schema_name: "foo"
+    schema_password: "pass"
+    state: "present"
+  check_mode: no
+  register: _
+  failed_when: _.failed or not _.changed
+
+- name: "user deletion with check mode (change)"
+  oracle_user:
+    <<: *con_param
+    schema_name: "foo"
+    schema_password: "pass"
+    state: "absent"
+  check_mode: yes
+  register: _
+  failed_when: _.failed or not _.changed
+
+- name: "user deletion without check mode (change)"
+  oracle_user:
+    <<: *con_param
+    schema_name: "foo"
+    schema_password: "pass"
+    state: "absent"
+  check_mode: no
+  register: _
+  failed_when: _.failed or not _.changed
+...

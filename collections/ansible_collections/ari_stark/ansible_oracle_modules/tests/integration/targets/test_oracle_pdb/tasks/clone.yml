@@ -1,0 +1,48 @@
+---
+- name: "define connection parameters"
+  set_fact:
+    connection_parameters: &con_param
+      service_name: "{{ service_name }}"
+      username: "SYS"
+      password: "{{ sys_password }}"
+      mode: "sysdba"
+
+- name: create an opened PDB
+  oracle_pdb:
+    <<: *con_param
+    pdb_name: "XEPDB2"
+    state: "opened"
+    pdb_admin_username: foo
+    pdb_admin_password: bar
+    file_name_convert:
+      "/opt/oracle/oradata/XE/pdbseed": "/tmp/xepdb2/dbf01"
+
+- name: open PDB source in read only
+  oracle_pdb:
+    <<: *con_param
+    pdb_name: "XEPDB2"
+    state: "opened"
+    read_only: yes
+
+- name: create a clone PDB
+  oracle_pdb:
+    <<: *con_param
+    pdb_name: "XESNAP1"
+    state: "opened"
+    clone_from: "XEPDB2"
+    snapshot_copy: yes
+    file_name_convert:
+      "/tmp/xepdb2/dbf01": "/tmp/xesnap1/dbf01"
+
+- name: drop clone PDB
+  oracle_pdb:
+    <<: *con_param
+    pdb_name: "XESNAP1"
+    state: "absent"
+
+- name: drop source PDB
+  oracle_pdb:
+    <<: *con_param
+    pdb_name: "XEPDB2"
+    state: "absent"
+...

@@ -34,26 +34,35 @@
 
   tasks:
 
-    - debug:
-        var: oracle_servers
-      when: inventory_hostname in oracle_servers
+#   - debug:
+#       var: oracle_servers
+#     when: inventory_hostname in oracle_servers
+#
+#   - copy:
+#       content: "{{ my_query }}"
+#       dest: /tmp/run_query.sql
+#       owner: oracle
+#       group: oinstall
+#     when: inventory_hostname in oracle_servers
+#
+#   - name: run sqlplus command
+#     become: true
+#     become_user: oracle
+#     become_method: su
+#     #remote_user: oracle
+#     #shell: pwd && id
+#     shell: cd /home/oracle && . ./.bash_profile && sqlplus -s {{ ora_usr }}/{{ ora_pwd }}@{{ ora_sid }} @/tmp/run_query.sql
+#     register: sqlout
+#     when: inventory_hostname in oracle_servers
 
-    - copy:
-        content: "{{ my_query }}"
-        dest: /tmp/run_query.sql
-        owner: oracle
-        group: oinstall
-      when: inventory_hostname in oracle_servers
-
-    - name: run sqlplus command
-      become: true
-      become_user: oracle
-      become_method: su
-      #remote_user: oracle
-      #shell: pwd && id
-      shell: cd /home/oracle && . ./.bash_profile && sqlplus -s {{ ora_usr }}/{{ ora_pwd }}@{{ ora_sid }} @/tmp/run_query.sql
+    - name: query database
+      oracle_sql:
+        hostname: "oradb19c.betatest.local"
+        username: "mgmt"
+        password: "8volante"
+        service_name: "OMUVF"
+        sql: "select * from hosts"
       register: sqlout
-      when: inventory_hostname in oracle_servers
 
     - debug: 
         var: sqlout

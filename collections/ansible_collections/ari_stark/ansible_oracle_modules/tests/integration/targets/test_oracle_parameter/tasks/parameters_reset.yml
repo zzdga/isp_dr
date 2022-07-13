@@ -1,0 +1,52 @@
+---
+- name: "define pdb connection parameters"
+  set_fact:
+    connection_parameters: &con_param
+      service_name: "{{ pdb_service_name }}"
+      username: "SYS"
+      password: "{{ sys_password }}"
+      mode: "sysdba"
+
+- name: "define cdb connection parameters"
+  set_fact:
+    cdb_connection_parameters: &cdb_con_param
+      service_name: "{{ cdb_service_name }}"
+      username: "SYS"
+      password: "{{ sys_password }}"
+      mode: "sysdba"
+
+- name: "reset open_cursors"
+  oracle_parameter:
+    <<: *con_param
+    name: "open_cursors"
+    state: "default"
+    scope: "both"
+
+- name: "reset blank_trimming"
+  oracle_parameter:
+    <<: *con_param
+    name: "blank_trimming"
+    state: "default"
+    scope: "spfile"
+
+- name: "reset nls_language"
+  oracle_parameter:
+    <<: *con_param
+    name: "nls_language"
+    state: "default"
+    scope: "spfile"
+
+- name: "reset db_recovery_file_dest (cdb only)"
+  oracle_parameter:
+    <<: *cdb_con_param
+    name: "db_recovery_file_dest"
+    state: "default"
+    scope: "spfile"
+
+- name: "reset _disable_directory_link_check (cdb only)"
+  oracle_parameter:
+    <<: *cdb_con_param
+    name: "_disable_directory_link_check"
+    state: "default"
+    scope: "spfile"
+...

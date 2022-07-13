@@ -1,0 +1,41 @@
+---
+- name: "define connection parameters"
+  set_fact:
+    connection_parameters: &con_param
+      service_name: "{{ service_name }}"
+      username: "SYS"
+      password: "{{ sys_password }}"
+      mode: "sysdba"
+
+- name: create a role
+  oracle_role:
+    <<: *con_param
+    role: "r_foo"
+    state: "present"
+  register: _
+  failed_when: _.failed or not _.changed
+
+- name: create again a role
+  oracle_role:
+    <<: *con_param
+    role: "r_foo"
+    state: "present"
+  register: _
+  failed_when: _.failed or _.changed
+
+- name: drop a role
+  oracle_role:
+    <<: *con_param
+    role: "r_foo"
+    state: "absent"
+  register: _
+  failed_when: _.failed or not _.changed
+
+- name: drop again a role
+  oracle_role:
+    <<: *con_param
+    role: "r_foo"
+    state: "absent"
+  register: _
+  failed_when: _.failed or _.changed
+...

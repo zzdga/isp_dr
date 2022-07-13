@@ -1,0 +1,6 @@
+---
+service_name: "XEPDB1"
+sys_password: "password"
+app_user: "foo"
+app_password: "password"
+...

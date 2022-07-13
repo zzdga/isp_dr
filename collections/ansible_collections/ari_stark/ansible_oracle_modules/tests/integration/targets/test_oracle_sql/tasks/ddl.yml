@@ -1,0 +1,45 @@
+---
+- name: define connection parameters
+  set_fact:
+    sys_connection_parameters: &sys_con_param
+      service_name: "{{ service_name }}"
+      username: "SYS"
+      password: "{{ sys_password }}"
+      mode: "sysdba"
+    app_connection_parameters: &app_con_param
+      service_name: "{{ service_name }}"
+      username: "{{ app_user }}"
+      password: "{{ app_password }}"
+      mode: "normal"
+
+- name: prepare test
+  oracle_sql:
+    <<: *sys_con_param
+    script: |
+      create user foo identified by "password";
+      grant create session to foo;
+      alter user foo quota unlimited on users;
+      create table foo.t_foo (f1 varchar2(10), f2 varchar2(10));
+
+- name: insert statement
+  oracle_sql:
+    <<: *app_con_param
+    sql: "{{ item }}"
+  register: _
+  failed_when: not _.changed
+  loop:
+    - "insert into t_foo (f1, f2) values ('ab', 'cd')"
+    - "insert into t_foo (f1, f2) values ('ef', 'gh')"
+
+- name: check data
+  oracle_sql:
+    <<: *app_con_param
+    sql: "select f1, f2 from t_foo order by f1"
+  register: _
+  failed_when: _.changed or _.failed or _.data[0][0] != 'ab' or _.data[0][1] != 'cd' or _.data[1][0] != 'ef' or _.data[1][1] != 'gh'
+
+- name: clean test
+  oracle_sql:
+    <<: *sys_con_param
+    sql: "drop user foo cascade"
+...

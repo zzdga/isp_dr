@@ -1,0 +1,73 @@
+---
+- name: "define connection parameters"
+  set_fact:
+    connection_parameters: &con_param
+      service_name: "{{ service_name }}"
+      username: "SYS"
+      password: "{{ sys_password }}"
+      mode: "sysdba"
+
+- name: create a closed PDB
+  oracle_pdb:
+    <<: *con_param
+    pdb_name: "XEPDB2"
+    state: "closed"
+    pdb_admin_username: foo
+    pdb_admin_password: bar
+    file_name_convert:
+      "/opt/oracle/oradata/XE/pdbseed": "/tmp/xepdb2/dbf01"
+
+- name: close PDB
+  oracle_pdb:
+    <<: *con_param
+    pdb_name: "XEPDB2"
+    state: "closed"
+  register: _
+  failed_when: _.failed or _.changed
+
+- name: check PDB state
+  oracle_pdb:
+    <<: *con_param
+    pdb_name: "XEPDB2"
+    state: "present"
+  register: _
+  failed_when: _.state != 'closed'
+
+- name: open PDB
+  oracle_pdb:
+    <<: *con_param
+    pdb_name: "XEPDB2"
+    state: "opened"
+  register: _
+  failed_when: _.failed or not _.changed
+
+- name: reopen PDB => no change
+  oracle_pdb:
+    <<: *con_param
+    pdb_name: "XEPDB2"
+    state: "opened"
+  register: _
+  failed_when: _.failed or _.changed
+
+- name: check PDB state
+  oracle_pdb:
+    <<: *con_param
+    pdb_name: "XEPDB2"
+    state: "present"
+  register: _
+  failed_when: _.state != 'opened' and _.read_only
+
+- name: close PDB
+  oracle_pdb:
+    <<: *con_param
+    pdb_name: "XEPDB2"
+    state: "closed"
+  register: _
+  failed_when: _.failed or not _.changed
+
+- name: drop PDB
+  oracle_pdb:
+    <<: *con_param
+    pdb_name: "XEPDB2"
+    state: "absent"
+...

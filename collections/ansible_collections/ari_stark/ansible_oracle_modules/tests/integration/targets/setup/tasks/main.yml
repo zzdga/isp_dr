@@ -1,0 +1,29 @@
+---
+- name: "install cx_Oracle"
+  pip:
+    name: "cx_Oracle"
+    state: "present"
+
+- block:
+    - name: "check InstantClient is installed"
+      apt:
+        name: "oracle-instantclient19.5-basiclite"
+  rescue:
+    - name: "install Instant Client dependencies"
+      apt:
+        name:
+          - "libaio1"
+          - "alien"
+        state: "present"
+
+    - name: "get Instant Client RPM"
+      get_url:
+        url: "https://download.oracle.com/otn_software/linux/instantclient/195000/oracle-instantclient19.5-basiclite-19.5.0.0.0-1.x86_64.rpm"
+        dest: "/tmp/instantclient.rpm"
+
+    - name: "install Instant Client"
+      command: "alien -i /tmp/instantclient.rpm"
+
+    - name: "run dynamic linker"
+      command: "ldconfig"
+...

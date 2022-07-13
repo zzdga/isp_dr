@@ -1,0 +1,37 @@
+---
+- name: "define connection parameters"
+  set_fact:
+    connection_parameters: &con_param
+      service_name: "{{ service_name }}"
+      username: "SYS"
+      password: "{{ sys_password }}"
+      mode: "sysdba"
+
+- name: create in check mode
+  oracle_role:
+    <<: *con_param
+    role: "r_foo"
+  check_mode: yes
+
+- name: create again without check mode
+  oracle_role:
+    <<: *con_param
+    role: "r_foo"
+  register: _
+  failed_when: _.failed or not _.changed
+
+- name: drop role in check mode
+  oracle_role:
+    <<: *con_param
+    role: "r_foo"
+    state: "absent"
+  check_mode: yes
+
+- name: drop role without check mode
+  oracle_role:
+    <<: *con_param
+    role: "r_foo"
+    state: "absent"
+  register: _
+  failed_when: _.failed or not _.changed
+...

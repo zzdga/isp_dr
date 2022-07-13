@@ -1,0 +1,25 @@
+---
+- name: "define connection parameters"
+  set_fact:
+    connection_parameters: &con_param
+      service_name: "{{ service_name }}"
+      username: "SYS"
+      password: "{{ sys_password }}"
+      mode: "sysdba"
+
+- name: "delete a system user (not authorized)"
+  oracle_user:
+    <<: *con_param
+    schema_name: "system"
+    state: "absent"
+  register: _
+  failed_when: not _.failed or 'system user' not in _.msg
+
+- name: "delete an inexistant user"
+  oracle_user:
+    <<: *con_param
+    schema_name: "inexistant_user"
+    state: "absent"
+  register: _
+  failed_when: _.failed or _.changed
+...

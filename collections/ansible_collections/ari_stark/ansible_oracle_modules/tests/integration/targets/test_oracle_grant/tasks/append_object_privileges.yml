@@ -1,0 +1,50 @@
+---
+- name: "define connection parameters"
+  set_fact:
+    connection_parameters: &con_param
+      service_name: "{{ service_name }}"
+      username: "SYS"
+      password: "{{ sys_password }}"
+      mode: "sysdba"
+
+- name: add object privilege to user
+  oracle_grant:
+    <<: *con_param
+    grantee: "u_foo"
+    objects_privileges:
+      dbms_random:
+        - "execute"
+    state: "present"
+  register: _
+  failed_when: _.failed or (not _.changed and 'DBMS_RANDOM' not in _.ddls)
+
+- name: add existing object privilege to user
+  oracle_grant:
+    <<: *con_param
+    grantee: "u_foo"
+    objects_privileges:
+      dbms_random:
+        - "execute"
+    state: "present"
+  register: _
+  failed_when: _.failed or _.changed
+
+- name: add new object privileges to user
+  oracle_grant:
+    <<: *con_param
+    grantee: "u_foo"
+    objects_privileges:
+      dbms_random:
+        - "execute"
+      dba_users:
+        - "select"
+        - "read"
+    state: "present"
+  register: _
+  failed_when: _.failed or (not _.changed and 'DBMS_RANDOM' in _.ddls and 'DBA_USERS' not in _.ddls)
+
+- name: reset user's privilege
+  oracle_grant:
+    <<: *con_param
+    grantee: "u_foo"
+...

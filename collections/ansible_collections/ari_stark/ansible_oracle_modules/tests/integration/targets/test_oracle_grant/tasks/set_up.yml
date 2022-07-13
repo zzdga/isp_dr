@@ -1,0 +1,20 @@
+---
+- name: "define connection parameters"
+  set_fact:
+    connection_parameters: &con_param
+      service_name: "{{ service_name }}"
+      username: "SYS"
+      password: "{{ sys_password }}"
+      mode: "sysdba"
+
+- name: create u_foo user
+  oracle_user:
+    <<: *con_param
+    schema_name: "u_foo"
+    schema_password: "bar"
+
+- name: create r_foo role
+  oracle_role:
+    <<: *con_param
+    role: "r_foo"
+...

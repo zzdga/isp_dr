@@ -1,0 +1,28 @@
+---
+- name: define connection parameters
+  set_fact:
+    sys_connection_parameters: &sys_con_param
+      service_name: "{{ service_name }}"
+      username: "SYS"
+      password: "{{ sys_password }}"
+      mode: "sysdba"
+
+- name: execute two PL/SQL blocks
+  oracle_sql:
+    <<: *sys_con_param
+    script: |
+      declare
+        foo varchar2(10);
+      begin
+        foo := 'ab';
+      end;
+      /
+      declare
+        bar varchar2(10);
+      begin
+        bar := 'ab';
+      end;
+      /
+  register: _
+  failed_when: _.failed or _.statements | length != 2
+...

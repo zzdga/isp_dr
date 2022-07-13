@@ -1,0 +1,33 @@
+{
+ "collection_info": {
+  "namespace": "ari_stark",
+  "name": "ansible_oracle_modules",
+  "version": "1.2.1",
+  "authors": [
+   "Ari Stark",
+   "Mikael Sandstr\u00f6m <oravirt@gmail.com>"
+  ],
+  "readme": "README.md",
+  "tags": [
+   "oracle"
+  ],
+  "description": "Modules for working with Oracle Database",
+  "license": [
+   "MIT"
+  ],
+  "license_file": null,
+  "dependencies": {},
+  "repository": "https://github.com/ari-stark/ansible-oracle-modules",
+  "documentation": null,
+  "homepage": "https://github.com/ari-stark/ansible-oracle-modules",
+  "issues": "https://github.com/ari-stark/ansible-oracle-modules/issues"
+ },
+ "file_manifest_file": {
+  "name": "FILES.json",
+  "ftype": "file",
+  "chksum_type": "sha256",
+  "chksum_sha256": "25e79260389edca35daebe7767bb6e8b852bd40df3a5445d278d8bdf513b2c8c",
+  "format": 1
+ },
+ "format": 1
+}

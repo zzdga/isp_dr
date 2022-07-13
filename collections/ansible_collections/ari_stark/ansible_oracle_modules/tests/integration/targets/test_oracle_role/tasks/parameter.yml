@@ -1,0 +1,40 @@
+---
+- name: "define connection parameters"
+  set_fact:
+    connection_parameters: &con_param
+      service_name: "{{ service_name }}"
+      username: "SYS"
+      password: "{{ sys_password }}"
+      mode: "sysdba"
+
+- name: create with missing parameter
+  oracle_role:
+    <<: *con_param
+    role: "r_foo"
+    identified_method: "password"
+  register: _
+  failed_when: not _.failed
+
+- name: create with missing parameter
+  oracle_role:
+    <<: *con_param
+    role: "r_foo"
+    identified_method: "package"
+  register: _
+  failed_when: not _.failed
+
+- name: create without missing parameter
+  oracle_role:
+    <<: *con_param
+    role: "r_foo"
+    identified_method: "password"
+    identified_value: "bar"
+  register: _
+  failed_when: _.failed or not _.changed
+
+- name: drop role
+  oracle_role:
+    <<: *con_param
+    role: "r_foo"
+    state: "absent"
+...

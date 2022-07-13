@@ -1,0 +1,36 @@
+---
+- name: "define connection parameters"
+  set_fact:
+    connection_parameters: &con_param
+      service_name: "{{ service_name }}"
+      username: "SYS"
+      password: "{{ sys_password }}"
+      mode: "sysdba"
+
+- name: drop PDB
+  oracle_pdb:
+    <<: *con_param
+    pdb_name: "XEPDB2"
+    state: "absent"
+
+- name: create PDB
+  oracle_pdb:
+    <<: *con_param
+    pdb_name: "XEPDB2"
+    state: "closed"
+    pdb_admin_username: foo
+    pdb_admin_password: bar
+    file_name_convert:
+      "/opt/oracle/oradata/XE/pdbseed": "/tmp/xepdb2/dbf01"
+    roles: connect
+  register: _
+  failed_when: _.failed or not _.changed
+
+- name: drop PDB
+  oracle_pdb:
+    <<: *con_param
+    pdb_name: "XEPDB2"
+    state: "absent"
+  register: _
+  failed_when: _.failed or not _.changed
+...

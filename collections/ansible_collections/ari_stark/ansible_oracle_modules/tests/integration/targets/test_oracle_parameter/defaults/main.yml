@@ -1,0 +1,7 @@
+---
+cdb_service_name: "XE"
+pdb_service_name: "XEPDB1"
+sys_password: "password"
+dba_user: "system_ansible"
+dba_password: "system_ansible_password"
+...

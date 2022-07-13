@@ -1,0 +1,36 @@
+---
+- name: "define connection parameters"
+  set_fact:
+    connection_parameters: &con_param
+      service_name: "{{ service_name }}"
+      username: "SYS"
+      password: "{{ sys_password }}"
+      mode: "sysdba"
+
+- name: create directory
+  oracle_directory:
+    <<: *con_param
+    directory_name: "IMPEXP"
+    directory_path: "/tmp"
+
+- name: grant read,write,execute on directory IMPEXP
+  oracle_grant:
+    <<: *con_param
+    grantee: "r_foo"
+    objects_privileges:
+      IMPEXP:
+        - "read"
+        - "write"
+        - "execute"
+
+- name: drop directory
+  oracle_directory:
+    <<: *con_param
+    directory_name: "IMPEXP"
+    state: "absent"
+
+- name: reset user's privilege
+  oracle_grant:
+    <<: *con_param
+    grantee: "u_foo"
+...

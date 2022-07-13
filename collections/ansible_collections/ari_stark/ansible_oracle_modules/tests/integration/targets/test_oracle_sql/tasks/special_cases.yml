@@ -1,0 +1,21 @@
+---
+- name: define connection parameters
+  set_fact:
+    sys_connection_parameters: &sys_con_param
+      service_name: "{{ service_name }}"
+      username: "SYS"
+      password: "{{ sys_password }}"
+      mode: "sysdba"
+
+- name: execute requests with semicolon in it
+  oracle_sql:
+    <<: *sys_con_param
+    script: "select ';' from dual;"
+
+- name: execute requests on two lines
+  oracle_sql:
+    <<: *sys_con_param
+    script: |
+      select ';'
+      from dual;
+...

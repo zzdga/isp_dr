@@ -1,0 +1,23 @@
+---
+- name: define connection parameters
+  set_fact:
+    sys_connection_parameters: &sys_con_param
+      service_name: "{{ service_name }}"
+      username: "SYS"
+      password: "{{ sys_password }}"
+      mode: "sysdba"
+
+- name: select from dual
+  oracle_sql:
+    <<: *sys_con_param
+    sql: "select * from dual"
+  register: _
+  failed_when: _.changed or _.failed or _.data[0][0] != 'X'
+
+- name: select from inexistent_table
+  oracle_sql:
+    <<: *sys_con_param
+    sql: "select * from inexistent_table"
+  register: _
+  failed_when: not _.failed or 'code' not in _ or _.code != 942
+...
