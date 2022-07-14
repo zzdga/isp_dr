@@ -5,6 +5,8 @@
     - community.mysql
   connection: local
   gather_facts: true
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
 
   tasks:
 
@@ -12,7 +14,5 @@
       community.mysql.mysql_query:
         login_db: prova
         query: select * from hosts
-      delegate_to: localhost
-      run_once: true
       ignore_errors: true
 
