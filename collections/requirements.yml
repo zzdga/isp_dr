@@ -9,9 +9,9 @@ collections:
   - name: git+https://github.com/ansible-collections/community.mysql
     type: git
     version: main
-  - name: https://github.com/ari-stark/ansible-oracle-modules.git
-    type: git
-    version: main
+#  - name: https://github.com/ari-stark/ansible-oracle-modules.git
+#    type: git
+#    version: main
 #  - name: https://github.com/Cyberitas/ansible-role-sqlserver.git
 #    type: git
 #    version: main
