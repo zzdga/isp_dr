@@ -6,6 +6,7 @@
     - community.mysql
     - community.windows
     - community.postgresql
+    - community.general.odbc
   connection: local
   gather_facts: true
   vars:
