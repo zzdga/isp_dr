@@ -2,7 +2,10 @@
 - name: test collections playbook
   hosts: localhost
   collections:
+    - community.general
     - community.mysql
+    - community.windows
+    - community.postgresql
   connection: local
   gather_facts: true
   vars:
