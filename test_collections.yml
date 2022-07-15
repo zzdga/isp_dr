@@ -11,6 +11,19 @@
   vars:
     ansible_python_interpreter: /usr/bin/python3
 
+  pre_tasks:
+
+    - assert:
+        that: item is defined
+      with_items:
+        - ambiente
+        - sito
+
+    - name: Loading {{ ambiente }} Environment Settings for Site {{ sito }}
+      include_vars:
+        dir: vars/{{ ambiente }}/{{ sito }}
+        depth: 1
+
   tasks:
 
     - name: test mysql query
