@@ -38,7 +38,7 @@
         var: sqlout.data
 
     - name: test odbc drive
-      community.general.odbc:
+      odbc:
         dsn: "DRIVER={ODBC Driver 13 for SQL Server};Server=mfoo.betatest.local;Database=WPDR0_DR2H_COLLAUDO;UID=WPDR0_TMC;PWD=WPDR0_TMC;"
         query: "Select * from DR2H_RIPARTENZA_COLLAUDO_DR_TOvsPR"
         commit: false
