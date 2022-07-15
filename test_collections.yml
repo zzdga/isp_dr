@@ -10,9 +10,46 @@
 
   tasks:
 
-    - name: test mysql collection
+    - name: test mysql query
       community.mysql.mysql_query:
         login_db: prova
         query: select * from hosts
+      register: sqlout
       ignore_errors: true
+
+    - debug:
+        var: sqlout.data
+
+    - name: query database
+      ari_stark.ansible_oracle_modules.oracle_sql:
+        hostname: "oradb19c.betatest.local"
+        username: "mgmt"
+        password: "8volante"
+        service_name: "OMUVF"
+        sql: "select * from hosts"
+      register: sqlout
+      ignore_errors: true
+
+    - debug:
+        var: sqlout.data
+
+    - name: test odbc drive
+      community.general.odbc:
+        dsn: "DRIVER={ODBC Driver 13 for SQL Server};Server=mfoo.betatest.local;Database=WPDR0_DR2H_COLLAUDO;UID=WPDR0_TMC;PWD=WPDR0_TMC;"
+        query: "Select * from DR2H_RIPARTENZA_COLLAUDO_DR_TOvsPR"
+        commit: false
+      register: sqlout
+      ignore_errors: true
+
+    - debug:
+        var: sqlout.data
+
+    - name: run windows command
+      win_command: whoami
+      delegate_to: mfoo.betatest.local
+      register: winout
+      ignore_errors: true
+
+    - debug:
+        var: winout
 
