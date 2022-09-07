@@ -1,0 +1,56 @@
+
+- name: "Environment: {{ ambiente }}   Site: {{ sito }}"
+  hosts: localhost
+  gather_facts: false
+
+  pre_tasks:
+
+    - assert:
+        that: item is defined
+      with_items:
+        - ambiente
+        - sito
+      run_once: true
+      delegate_to: localhost
+
+    - name: Loading {{ ambiente }} Environment Settings for Site {{ sito }}
+      include_vars: 
+        dir: vars/{{ ambiente }}/{{ sito }}
+        depth: 1
+      run_once: true
+      delegate_to: localhost
+
+  tasks:
+
+    - name: query database
+      community.general.odbc:
+        dsn: "DRIVER={Oracle Driver};DBQ=oradb19c.betatest.local:1521/OMUVF;UID=mgmt;PWD=8volante;"
+        query: "select json_object(*) from HOSTS"
+        commit: false
+      register: sqlout
+
+    - set_fact:
+        sql_data1: "{{ sql_data1 | default([]) + [{ \
+                       item.split(',')[0].split(':')[0] | replace('\"','') | replace('\','') | replace('{',''): item.split(',')[0].split(':')[1] | replace('\"','') | replace('\',''), \
+                       item.split(',')[1].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[1].split(':')[1] | replace('\"','') | replace('\',''), \
+                       item.split(',')[2].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[2].split(':')[1] | replace('\"','') | replace('\',''), \
+                       item.split(',')[3].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[3].split(':')[1] | replace('\"','') | replace('\',''), \
+                       item.split(',')[4].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[4].split(':')[1] | replace('\"','') | replace('\',''), \
+                       item.split(',')[5].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[5].split(':')[1] | replace('\"','') | replace('\',''),  \
+                       item.split(',')[6].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[6].split(':')[1] | replace('\"','') | replace('\',''),  \
+                       item.split(',')[7].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[7].split(':')[1] | replace('\"','') | replace('\',''),  \
+                       item.split(',')[8].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[8].split(':')[1] | replace('\"','') | replace('\',''),  \
+                       item.split(',')[9].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[9].split(':')[1] | replace('\"','') | replace('\',''),  \
+                       item.split(',')[10].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[10].split(':')[1] | replace('\"','') | replace('\',''),  \
+                       item.split(',')[11].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[11].split(':')[1] | replace('\"','') | replace('\',''),  \
+                       item.split(',')[12].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[12].split(':')[1] | replace('\"','') | replace('\',''),  \
+                       item.split(',')[13].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[13].split(':')[1] | replace('\"','') | replace('\',''),  \
+                       item.split(',')[14].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[14].split(':')[1] | replace('\"','') | replace('\',''),  \
+                       item.split(',')[15].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[15].split(':')[1] | replace('\"','') | replace('\',''),  \
+                       item.split(',')[16].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[16].split(':')[1] | replace('\"','') | replace('\','') | replace('}','') \
+                   }] }}"
+      with_items: "{{ sqlout.results }}"
+
+    - debug:
+        msg: "Server: {{ item.H_NAME }} in {{ item.H_LASTSTATUS }} status is {{ item.H_ACTIVE }}"
+      with_items: "{{ sql_data1 }}"
