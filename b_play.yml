@@ -5,8 +5,8 @@
   tasks:
 
     - name: run something
-      command: /bin/true
-      #command: /bin/false
+      #command: /bin/true
+      command: /bin/false
       register: a_run
 #      ignore_errors: true
       delegate_to: localhost
