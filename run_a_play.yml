@@ -1,0 +1,13 @@
+- name: Just a Playbook selector
+  hosts: all
+  gather_facts: false
+
+  tasks:
+
+    - name: Which Play
+      debug:
+        msg: "Selected Playbook is: {{ the_play }}.yml"
+
+    - name: importing the playbook
+      import_playbook: "{{ the_play }}.yml"
+
