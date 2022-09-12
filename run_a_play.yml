@@ -8,6 +8,6 @@
       debug:
         msg: "Selected Playbook is: {{ the_play }}.yml"
 
-    - name: importing the playbook
-      import_playbook: "{{ the_play }}.yml"
+- name: importing the playbook
+  import_playbook: "{{ the_play }}.yml"
 
