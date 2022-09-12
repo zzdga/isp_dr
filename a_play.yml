@@ -1,0 +1,21 @@
+
+- name: Just a Play 
+  hosts: all
+  gather_facts: false
+
+  tasks:
+
+    - name: run something 
+      #command: /bin/true
+      command: /bin/flase
+      register: a_run
+      ignore_errors: true
+
+    - debug:
+        msg: Hello the Play failed
+      when: not a_run.result 
+
+    - debug:
+        msg: Hello the Play Succeeded
+      when: a_run.result 
+
