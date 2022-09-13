@@ -7,6 +7,7 @@
 
     - name: sleep a moment
       command: /bin/sleep 10
+      delegate_to: localhost
 
     - name: run something
       command: /bin/true
