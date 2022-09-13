@@ -1,0 +1,29 @@
+- name: Just a Play
+  hosts: all
+  gather_facts: false
+
+  tasks:
+
+
+    - name: sleep a moment
+      command: /bin/sleep 10
+
+    - name: run something
+      command: /bin/true
+      #command: /bin/false
+      register: a_run
+#      ignore_errors: true
+      delegate_to: localhost
+
+#    - debug: var=a_run
+#
+#    - debug:
+#        msg: Hello the Play failed
+#      when: a_run.rc != 0
+#      delegate_to: localhost
+#
+#    - debug:
+#        msg: Hello the Play Succeeded
+#      when: a_run.rc == 0
+#      delegate_to: localhost
+
