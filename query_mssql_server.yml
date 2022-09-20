@@ -22,7 +22,7 @@
 
     - name: query mssql server database - odbc
       community.general.odbc:
-        dsn: "DRIVER={ODBC Driver 18 for SQL Server};DBQ=mfoo.betatest.local:1433/WPDR0_DR2H_COLLAUDO;UID=WPDR0_TMC;PWD=WPDR0_TMC;"
+        dsn: "DRIVER={ODBC Driver 18 for SQL Server};SERVER={mfoo.betatest.local};DATABASE={WPDR0_DR2H_COLLAUDO};UID={WPDR0_TMC};PWD={WPDR0_TMC};TrustServerCertificate=yes;"
         query: "select * from DR2H_RIPARTENZA_COLLAUDO_DR_TOvsPR"
         commit: false
       register: sqlout
