@@ -18,7 +18,7 @@
 
   tasks:
 
-    - name: query database
+    - name: query oracle database
       community.general.odbc:
         dsn: "DRIVER={Oracle Driver};DBQ=oradb19c.betatest.local:1521/OMUVF;UID=mgmt;PWD=8volante;"
         query: "select json_object(*) from HOSTS"

@@ -20,15 +20,22 @@
 
   tasks:
 
-    - name: query database
-      community.general.mssql_script:
-        login_user: WPDR0_TMC
-        login_password: WPDR0_TMC
-        login_host: mfoo.betatest.local 
-        db: WPDR0_DR2H_COLLAUDO
-        script: |
-          select * from DR2H_RIPARTENZA_COLLAUDO_DR_TOvsPR
+    - name: query mssql server database
+      community.general.odbc:
+        dsn: "DRIVER={Oracle Driver};DBQ=mfoo.betatest.local:1433/WPDR0_DR2H_COLLAUDO;UID=WPDR0_TMC;PWD=WPDR0_TMC;"
+        query: "select * from DR2H_RIPARTENZA_COLLAUDO_DR_TOvsPR"
+        commit: false
       register: sqlout
+
+#    - name: query database
+#      community.general.mssql_script:
+#        login_user: WPDR0_TMC
+#        login_password: WPDR0_TMC
+#        login_host: mfoo.betatest.local 
+#        db: WPDR0_DR2H_COLLAUDO
+#        script: |
+#          select * from DR2H_RIPARTENZA_COLLAUDO_DR_TOvsPR
+#      register: sqlout
 
 #    - set_fact:
 #        sql_data1: "{{ sql_data1 | default([]) + [{ \
