@@ -10,15 +10,11 @@
       with_items:
         - ambiente
         - sito
-      run_once: true
-      delegate_to: localhost
 
     - name: Loading {{ ambiente }} Environment Settings for Site {{ sito }}
       include_vars: 
         dir: vars/{{ ambiente }}/{{ sito }}
         depth: 1
-      run_once: true
-      delegate_to: localhost
 
   tasks:
 
@@ -54,3 +50,4 @@
     - debug:
         msg: "Server: {{ item.H_NAME }} in {{ item.H_LASTSTATUS }} status is {{ item.H_ACTIVE }}"
       with_items: "{{ sql_data1 }}"
+

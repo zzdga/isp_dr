@@ -1,0 +1,57 @@
+
+- name: "Environment: {{ ambiente }}   Site: {{ sito }} - Query MSSQL Server"
+  hosts: localhost
+  gather_facts: false
+
+  pre_tasks:
+
+    - assert:
+        that: item is defined
+      with_items:
+        - ambiente
+        - sito
+        - old_state
+        - new_state
+
+    - name: Loading {{ ambiente }} Environment Settings for Site {{ sito }}
+      include_vars: 
+        dir: vars/{{ ambiente }}/{{ sito }}
+        depth: 1
+
+  tasks:
+
+    - name: query database
+      community.general.mssql_script:
+        login_user: WPDR0_TMC
+        login_password: WPDR0_TMC
+        login_host: mfoo.betatest.local 
+        db: WPDR0_DR2H_COLLAUDO
+        script: |
+          select * from DR2H_RIPARTENZA_COLLAUDO_DR_TOvsPR
+      register: sqlout
+
+#    - set_fact:
+#        sql_data1: "{{ sql_data1 | default([]) + [{ \
+#                       item.split(',')[0].split(':')[0] | replace('\"','') | replace('\','') | replace('{',''): item.split(',')[0].split(':')[1] | replace('\"','') | replace('\',''), \
+#                       item.split(',')[1].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[1].split(':')[1] | replace('\"','') | replace('\',''), \
+#                       item.split(',')[2].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[2].split(':')[1] | replace('\"','') | replace('\',''), \
+#                       item.split(',')[3].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[3].split(':')[1] | replace('\"','') | replace('\',''), \
+#                       item.split(',')[4].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[4].split(':')[1] | replace('\"','') | replace('\',''), \
+#                       item.split(',')[5].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[5].split(':')[1] | replace('\"','') | replace('\',''),  \
+#                       item.split(',')[6].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[6].split(':')[1] | replace('\"','') | replace('\',''),  \
+#                       item.split(',')[7].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[7].split(':')[1] | replace('\"','') | replace('\',''),  \
+#                       item.split(',')[8].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[8].split(':')[1] | replace('\"','') | replace('\',''),  \
+#                       item.split(',')[9].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[9].split(':')[1] | replace('\"','') | replace('\',''),  \
+#                       item.split(',')[10].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[10].split(':')[1] | replace('\"','') | replace('\',''),  \
+#                       item.split(',')[11].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[11].split(':')[1] | replace('\"','') | replace('\',''),  \
+#                       item.split(',')[12].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[12].split(':')[1] | replace('\"','') | replace('\',''),  \
+#                       item.split(',')[13].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[13].split(':')[1] | replace('\"','') | replace('\',''),  \
+#                       item.split(',')[14].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[14].split(':')[1] | replace('\"','') | replace('\',''),  \
+#                       item.split(',')[15].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[15].split(':')[1] | replace('\"','') | replace('\',''),  \
+#                       item.split(',')[16].split(':')[0] | replace('\"','') | replace('\',''): item.split(',')[16].split(':')[1] | replace('\"','') | replace('\','') | replace('}','') \
+#                   }] }}"
+#      with_items: "{{ sqlout.results }}"
+
+    - debug:
+        var: sqlout
+
