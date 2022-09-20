@@ -1,0 +1,32 @@
+
+- name: "Environment: {{ ambiente }}   Site: {{ sito }}"
+  hosts: localhost
+  gather_facts: false
+
+  pre_tasks:
+
+    - assert:
+        that: item is defined
+      with_items:
+        - ambiente
+        - sito
+
+    - name: Loading {{ ambiente }} Environment Settings for Site {{ sito }}
+      include_vars: 
+        dir: vars/{{ ambiente }}/{{ sito }}
+        depth: 1
+
+  tasks:
+
+    - name: query oracle database
+      community.general.odbc:
+        dsn: "DRIVER={Oracle Driver};DBQ={{ ora_server }}:1521/{{ ora_sid }};UID={{ ora_usr }};PWD={{ ora_pwd }};"
+        #dsn: "DRIVER={Oracle Driver};DBQ=oradb19c.betatest.local:1521/OMUVF;UID=mgmt;PWD=8volante;"
+        query: "select {{ ora_in_msg | default('No Ora In Message') }} from dual"
+        commit: false
+      register: sqlout
+
+    - debug:
+        var: sqlout
+      when: sqlout is defined
+

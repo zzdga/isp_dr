@@ -22,28 +22,29 @@
 
     - name: query mssql server database - odbc
       community.general.odbc:
-        dsn: "DRIVER={ODBC Driver 18 for SQL Server};SERVER={mfoo.betatest.local};DATABASE={WPDR0_DR2H_COLLAUDO};UID={WPDR0_TMC};PWD={WPDR0_TMC};TrustServerCertificate=yes;"
+        dsn: "DRIVER={ODBC Driver 18 for SQL Server};SERVER={{ mssql_server }};DATABASE={{ mssql_db }};UID={{ mssql_usr }};PWD={{ mssql_pwd }};TrustServerCertificate=yes;"
+        #dsn: "DRIVER={ODBC Driver 18 for SQL Server};SERVER={mfoo.betatest.local};DATABASE={WPDR0_DR2H_COLLAUDO};UID={WPDR0_TMC};PWD={WPDR0_TMC};TrustServerCertificate=yes;"
         query: "select * from DR2H_RIPARTENZA_COLLAUDO_DR_TOvsPR"
         commit: false
       register: sqlout
       ignore_errors: true
 
     - debug:
-        var: sqlout
+        msg: "rowcount: {{ sqlout.results | length }}"
       when: sqlout is defined
 
     - name: query mssql server database - mssql_script
       community.general.mssql_script:
-        login_user: WPDR0_TMC
-        login_password: WPDR0_TMC
-        login_host: mfoo.betatest.local 
-        db: WPDR0_DR2H_COLLAUDO
+        login_user: "{{ mssql_usr }}"
+        login_password: "{{ mssql_pwd }}"
+        login_host: "{{ mssql_server }}"
+        db: "{{ mssql_db }}"
         script: |
           select * from DR2H_RIPARTENZA_COLLAUDO_DR_TOvsPR
       register: sqlout1
 
     - debug:
-        var: sqlout1
+        msg: "rowcount: {{ sqlout1.results | length }}"
       when: sqlout1 is defined
 
 #    - set_fact:
