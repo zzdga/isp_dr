@@ -38,7 +38,7 @@
       community.general.odbc:
         dsn: "DRIVER={ODBC Driver 18 for SQL Server};SERVER={{ mssql_server }};DATABASE={{ mssql_db }};UID={{ mssql_usr }};PWD={{ mssql_pwd }};TrustServerCertificate=yes;"
         query: "select count(*) from DR2H_RIPARTENZA_COLLAUDO_DR_TOvsPR where STATUS = 'IN ATTESA DI INVOCAZIONE'"
-        commit: true
+        commit: false
       register: states_count
       ignore_errors: true
 
