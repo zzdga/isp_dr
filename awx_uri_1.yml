@@ -18,28 +18,42 @@
         depth: 1
 
     - set_fact:
-        url_server: "https://{{ awx_srv }}"
-        list_tokens: /api/v2/tokens/
         create_token: /api/v2/tokens/
+        list_jobs: /api/v2/jobs/
 
   tasks:
 
-    - name: test GET
+#    - name: create Auth Token
+#      uri:
+#        url: "https://{{ awx_srv }}{{ create_token }}"
+#        method: POST
+#        user: "{{ awx_usr }}"
+#        password: "{{ awx_pwd }}"
+#        headers:
+#          Accept: "application/json"
+#          Content-Type: "application/json"
+#          #Authorization: "{{key}}"
+#        force_basic_auth: true
+#        validate_certs: false
+#        return_content: yes
+#      register: uri_out
+#      ignore_errors: true
+
+    - name: List Jobs
       uri:
-        url: "{{ url_server }}{{ create_token }}"
-        method: POST
-        return_content: yes
-        user: "{{ awx_usr }}"
-        password: "{{ awx_pwd }}"
+        url: "https://{{ awx_srv }}{{ list_jobs }}"
+        method: GET
         headers:
           Accept: "application/json"
           Content-Type: "application/json"
-          #Authorization: "{{key}}"
-      register: uri_out
+          Authorization: "{{ awx_token }}"
+        validate_certs: false
+        return_content: yes
+      register: jobs_out
       ignore_errors: true
 
     - debug:
-        var: uri_out
-      when: uri_out is defined
+        var: jobs_out
+      when: jobs_out is defined
 
 
