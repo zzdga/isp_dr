@@ -45,7 +45,8 @@
 
     - debug:
         #var: sqlout1
-        msg: "rowcount: {{ sqlout1.query_results | length }}"
+        msg: "rowcount: {{ sqlout1.query_results | community.general.counter }}"
+        #msg: "rowcount: {{ sqlout1.query_results | length }}"
       when: sqlout1 is defined
 
 #    - set_fact:
