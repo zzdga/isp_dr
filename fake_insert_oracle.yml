@@ -18,7 +18,7 @@
 
   tasks:
 
-    - name: query oracle database
+    - name: fake insert into oracle database
       community.general.odbc:
         dsn: "DRIVER={Oracle Driver};DBQ={{ ora_server }}:1521/{{ ora_sid }};UID={{ ora_usr }};PWD={{ ora_pwd }};"
         #dsn: "DRIVER={Oracle Driver};DBQ=oradb19c.betatest.local:1521/OMUVF;UID=mgmt;PWD=8volante;"

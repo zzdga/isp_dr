@@ -20,20 +20,20 @@
 
   tasks:
 
-    - name: query mssql server database - odbc
+    - name: fake insert into mssql server database - odbc
       community.general.odbc:
         dsn: "DRIVER={ODBC Driver 18 for SQL Server};SERVER={{ mssql_server }};DATABASE={{ mssql_db }};UID={{ mssql_usr }};PWD={{ mssql_pwd }};TrustServerCertificate=yes;"
         #dsn: "DRIVER={ODBC Driver 18 for SQL Server};SERVER={mfoo.betatest.local};DATABASE={WPDR0_DR2H_COLLAUDO};UID={WPDR0_TMC};PWD={WPDR0_TMC};TrustServerCertificate=yes;"
         query: "select * from DR2H_RIPARTENZA_COLLAUDO_DR_TOvsPR"
-        commit: false
+        commit: true
       register: sqlout
       ignore_errors: true
 
     - debug:
-        msg: "rowcount: {{ sqlout.results | length }}"
+        var: sqlout
       when: sqlout is defined
 
-    - name: query mssql server database - mssql_script
+    - name: fake insert into mssql server database - mssql_script
       community.general.mssql_script:
         login_user: "{{ mssql_usr }}"
         login_password: "{{ mssql_pwd }}"
@@ -45,7 +45,6 @@
 
     - debug:
         var: sqlout1
-        #msg: "rowcount: {{ sqlout1.query_results | length }}"
       when: sqlout1 is defined
 
 #    - set_fact:
