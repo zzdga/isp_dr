@@ -33,6 +33,9 @@
         msg: "rowcount: {{ sqlout.results | length }}"
       when: sqlout is defined
 
+    - debug:
+        var: sqlout.results
+
     - name: query mssql server database - mssql_script
       community.general.mssql_script:
         login_user: "{{ mssql_usr }}"
