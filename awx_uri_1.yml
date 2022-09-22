@@ -1,0 +1,45 @@
+
+- name: "Environment: {{ ambiente }}   Site: {{ sito }} - Query MSSQL Server"
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  pre_tasks:
+
+    - assert:
+        that: item is defined
+      with_items:
+        - ambiente
+        - sito
+
+    - name: Loading {{ ambiente }} Environment Settings for Site {{ sito }}
+      include_vars: 
+        dir: vars/{{ ambiente }}/{{ sito }}
+        depth: 1
+
+    - set_fact:
+        url_server: "https://{{ awx_srv }}"
+        list_tokens: /api/v2/tokens/
+        create_token: /api/v2/tokens/
+
+  tasks:
+
+    - name: test GET
+      uri:
+        url: "{{ url_server }}{{ create_token }}"
+        method: POST
+        return_content: yes
+        user: "{{ awx_usr }}"
+        password: "{{ awx_pwd }}"
+        headers:
+          Accept: "application/json"
+          Content-Type: "application/json"
+          #Authorization: "{{key}}"
+      register: uri_out
+      ignore_errors: true
+
+    - debug:
+        var: uri_out
+      when: uri_out is defined
+
+
