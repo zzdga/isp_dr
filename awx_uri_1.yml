@@ -134,12 +134,12 @@
       retries: 2
       register: jobs_templates
 
-    - debug: var=jobs_templates
+#    - debug: var=jobs_templates
 
     - debug:
         #var: item.summary_fields.project
-        msg: "Job Template: {{ item.name }}   Playbook: {{ item.playbook }}  Project: {{ item.summary_fields.project.name }}"
-      when: item.project.name == 'isp_dr' and item.name == 'z play'
+        msg: "Job Template: {{ item.name }}"
+      #when: item.project.name == 'isp_dr' and item.name == 'z play'
       with_items: "{{ jobs_templates.json.results }}"
 
     - set_fact:
