@@ -139,12 +139,12 @@
     - debug:
         #var: item.summary_fields.project
         msg: "Job Template: {{ item.name }}   Playbook: {{ item.playbook }}  Project: {{ item.summary_fields.project.name }}"
-      when: item.summary_fields.project.name == 'isp_dr' and item.name == 'z play'
+      when: item.project.name == 'isp_dr' and item.name == 'z play'
       with_items: "{{ jobs_templates.json.results }}"
 
     - set_fact:
         job_id: "{{ item.id }}"
-      when: item.summary_fields.project.name == 'isp_dr' and item.name == 'z play'
+      when: item.project.name == 'isp_dr' and item.name == 'z play'
       with_items: "{{ jobs_templates.json.results }}"
 
     - debug:
