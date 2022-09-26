@@ -20,40 +20,203 @@
     - set_fact:
         create_token: /api/v2/tokens/
         list_jobs: /api/v2/jobs/
+        list_templates: /api/v2/job_templates/?page_size=1000
+        launch_template: /api/v2/job_templates/                        #{id}/launch/
+        list_wf: /api/v2/workflow_job_templates/
+        job_activity: /api/v2/job_templates/                           #{id}/activity_stream/
+        job_runs: /api/v2/job_templates/                               #{id}/jobs/
 
   tasks:
 
-#    - name: create Auth Token
+    - name: create Auth Token
+      uri:
+        url: "https://{{ awx_srv }}{{ create_token }}"
+        method: POST
+        user: "{{ awx_usr }}"
+        password: "{{ awx_pwd }}"
+        headers:
+          Accept: "application/json"
+          Content-Type: "application/json"
+          Authorization: "Token"
+        force_basic_auth: true
+        validate_certs: false
+        return_content: yes
+        status_code: 201
+      register: my_token
+
+#    - debug: var=my_token
+
+    - set_fact:
+        api_token: "{{ my_token.json.token }}"
+
+#    - debug: 
+#        msg: "My API Token: {{ api_token }}"
+
+#    - name: get WF
 #      uri:
-#        url: "https://{{ awx_srv }}{{ create_token }}"
-#        method: POST
+#        url: "https://{{ awx_srv }}{{ list_wf }}"
+#        method: GET
 #        user: "{{ awx_usr }}"
 #        password: "{{ awx_pwd }}"
+#        force_basic_auth: true
 #        headers:
 #          Accept: "application/json"
 #          Content-Type: "application/json"
-#          #Authorization: "{{key}}"
-#        force_basic_auth: true
+#          #Authorization: "{{ awx_token }}"
 #        validate_certs: false
 #        return_content: yes
-#      register: uri_out
+#      register: wf_out
 #      ignore_errors: true
+#
+#    - debug:
+#        msg: "WF: {{ item.name }}"
+#      with_items: "{{ wf_out.json.results }}"
+#      when: wf_out is defined
 
-    - name: List Jobs
+#    - name: get Job Templates
+#      uri:
+#        url: "https://{{ awx_srv }}{{ list_jobs }}"
+#        method: GET
+#        user: "{{ awx_usr }}"
+#        password: "{{ awx_pwd }}"
+#        force_basic_auth: true
+#        headers:
+#          Accept: "application/json"
+#          Content-Type: "application/json"
+#          #Authorization: "{{ awx_token }}"
+#        validate_certs: false
+#        return_content: yes
+#      register: jobs_out
+#      ignore_errors: true
+#
+#    - debug: var=jobs_out
+#
+#    - name: get additional job templates
+#      uri:
+#        url: "https://{{ awx_srv }}{{ jobs_list_out.json.next | default(jobs_out.json.next) }}"
+#        method: GET
+#        user: "{{ awx_usr }}"
+#        password: "{{ awx_pwd }}"
+#        #force_basic_auth: true
+#        headers:
+#          Accept: "application/json"
+#          Content-Type: "application/json"
+#          #Authorization: "{{ awx_token }}"
+#          X-API-Request-Id: "{{ jobs_out.x_api_request_id }}"
+#        validate_certs: false
+#        return_content: yes
+#      #retries: 10
+#      register: jobs_list_out
+#      ignore_errors: true
+#      until: not jobs_list_out.json.next 
+#
+#    - debug:
+#        #msg: "Job: {{ item.name }}  Play: {{ item.playbook }}"
+#        var: jobs_list_out
+#        #msg: "{{ item.name }} - {{ item.playbook }}"
+#        #msg: "{% for job in jobs_out.json.results %} {{ job.name }} {{ job.playbook }} {% endfor %}"
+#        #msg: "{{ jobs_out.json.results | selectattr('name',!=,'') | selectattr('playbook',!=,'') }}"
+#        #var: jobs_out
+#      #with_items: "{{ jobs_out.json.results.0 }}"
+#      #with_items: "{{ jobs_out.json.results.0 }}"
+#      when: jobs_list_out is defined
+
+    - name: get job templates
       uri:
-        url: "https://{{ awx_srv }}{{ list_jobs }}"
+        url: "https://{{ awx_srv }}{{ jobs_templates.json.next | default(list_templates) }}"
         method: GET
         headers:
           Accept: "application/json"
           Content-Type: "application/json"
-          Authorization: "{{ awx_token }}"
+          Authorization: "Bearer {{ api_token }}"
         validate_certs: false
         return_content: yes
-      register: jobs_out
-      ignore_errors: true
+      retries: 2
+      register: jobs_templates
+
+#    - debug: var=jobs_templates
 
     - debug:
-        var: jobs_out
-      when: jobs_out is defined
+        #var: item.summary_fields.project
+        msg: "Job Template: {{ item.name }}   Playbook: {{ item.playbook }}  Project: {{ item.summary_fields.project.name }}"
+      when: item.summary_fields.project.name == 'isp_dr' and item.name == 'z play'
+      with_items: "{{ jobs_templates.json.results }}"
 
+    - set_fact:
+        job_id: "{{ item.id }}"
+      when: item.summary_fields.project.name == 'isp_dr' and item.name == 'z play'
+      with_items: "{{ jobs_templates.json.results }}"
+
+    - debug:
+        msg: "will run job template id: {{ job_id }}"
+
+    - name: run job template {{ job_id }}
+      uri:
+        url: "https://{{ awx_srv }}{{ launch_template }}{{ job_id }}/launch/"
+        method: POST
+        headers:
+          Accept: "application/json"
+          Content-Type: "application/json"
+          Authorization: "Bearer {{ api_token }}"
+        validate_certs: false
+        return_content: yes
+        status_code: 201
+      register: run_template
+
+    - debug: var=run_template
+  
+    - name: get run job template {{ job_id }} state
+      uri:
+        url: "{{ run_template.location }}"
+        method: GET
+        headers:
+          Accept: "application/json"
+          Content-Type: "application/json"
+          Authorization: "Bearer {{ api_token }}"
+        validate_certs: false
+        return_content: yes
+      delay: 10
+      retries: 10
+      register: get_run
+      until: get_run.json.status != 'pending' and get_run.json.status != 'running' and get_run.json.status != 'waiting'
+
+    #- debug: var=get_run
+
+    - debug:
+        msg: "Job Run {{ run_template.location }} was {{ get_run.json.status }}"
+      failed_when: get_run.json.status != 'successful'
+      ignore_errors: true
+  
+    - name: get job runs {{ job_id }}
+      uri:
+        url: "https://{{ awx_srv }}{{ job_runs }}{{ job_id }}/jobs/?page_size=1000"
+        method: GET
+        headers:
+          Accept: "application/json"
+          Content-Type: "application/json"
+          Authorization: "Bearer {{ api_token }}"
+        validate_certs: false
+        return_content: yes
+      #delay: 10
+      #retries: 10
+      register: job_runs_out
+      #until: get_run.json.status != 'pending' and get_run.json.status != 'running' and get_run.json.status != 'waiting'
+
+    #- debug: var=job_runs_out
+
+    - set_fact:
+        max_id: "{{ job_runs_out.json.results | sort(attribute='id') | last }}"
+
+    - debug: var=max_id.id
+
+#    - debug:
+#        msg: "Job Run {{ run_template.location }} was {{ get_run.json.status }}"
+#      failed_when: get_run.json.status != 'successful'
+#      ignore_errors: true
+  
+    - set_fact:
+        my_template_id: "{{ jobs_templates.json.results | selectattr('name','match','z play') }}"
+
+    - debug:
+        var: my_template_id.0.id
 
