@@ -79,15 +79,25 @@
 
   tasks:
 
-    - name: update mssql server RIPARTENZA - mssql_script
-      community.general.mssql_script:
-        login_user: "{{ mssql_usr }}"
-        login_password: "{{ mssql_pwd }}"
-        login_host: "{{ mssql_server }}"
-        db: "{{ mssql_db }}"
-        script: |
-          update DR2H_RIPARTENZA_COLLAUDO_DR_TOvsPR set STATUS = 'COMPLETATO' where FASE like '%RIPARTENZA%'
+    - name: update mssql states - odbc
+      community.general.odbc:
+        dsn: "DRIVER={ODBC Driver 18 for SQL Server};SERVER={{ mssql_server }};DATABASE={{ mssql_db }};UID={{ mssql_usr }};PWD={{ mssql_pwd }};TrustServerCertificate=yes;"
+        #dsn: "DRIVER={ODBC Driver 18 for SQL Server};SERVER={mfoo.betatest.local};DATABASE={WPDR0_DR2H_COLLAUDO};UID={WPDR0_TMC};PWD={WPDR0_TMC};TrustServerCertificate=yes;"
+        query: "update DR2H_RIPARTENZA_COLLAUDO_DR_TOvsPR set STATUS = 'COMPLETATO' where FASE like '%RIPARTENZA%'"
+        commit: true
       register: sqlout1
+      ignore_errors: true
+
+#    - name: update mssql server RIPARTENZA - mssql_script
+#      community.general.mssql_script:
+#        login_user: "{{ mssql_usr }}"
+#        login_password: "{{ mssql_pwd }}"
+#        login_host: "{{ mssql_server }}"
+#        db: "{{ mssql_db }}"
+#        script: |
+#          update DR2H_RIPARTENZA_COLLAUDO_DR_TOvsPR set STATUS = 'COMPLETATO' where FASE like '%RIPARTENZA%'
+#          GO
+#      register: sqlout1
 
     - debug:
         var: sqlout1
