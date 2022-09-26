@@ -1,0 +1,58 @@
+
+- name: "Environment: {{ ambiente }}   Site: {{ sito }} - Query MSSQL Server"
+  hosts: localhost
+  gather_facts: false
+
+  pre_tasks:
+
+    - assert:
+        that: item is defined
+      with_items:
+        - ambiente
+        - sito
+        - old_state
+        - new_state
+
+    - name: Loading {{ ambiente }} Environment Settings for Site {{ sito }}
+      include_vars: 
+        dir: vars/{{ ambiente }}/{{ sito }}
+        depth: 1
+
+  tasks:
+
+    - name: update mssql states RIPARTENZA - odbc
+      community.general.odbc:
+        dsn: "DRIVER={ODBC Driver 18 for SQL Server};SERVER={{ mssql_server }};DATABASE={{ mssql_db }};UID={{ mssql_usr }};PWD={{ mssql_pwd }};TrustServerCertificate=yes;"
+        #dsn: "DRIVER={ODBC Driver 18 for SQL Server};SERVER={mfoo.betatest.local};DATABASE={WPDR0_DR2H_COLLAUDO};UID={WPDR0_TMC};PWD={WPDR0_TMC};TrustServerCertificate=yes;"
+        query: "update DR2H_RIPARTENZA_COLLAUDO_DR_TOvsPR set STATUS = 'COMPLETATO' where FASE like '%RIPARTENZA%'"
+        commit: true
+      register: ms_update
+      ignore_errors: true
+
+    - debug:
+        var: ms_update
+      when: ms_update is defined
+
+
+#    - name: count mssql states - odbc
+#      community.general.odbc:
+#        dsn: "DRIVER={ODBC Driver 18 for SQL Server};SERVER={{ mssql_server }};DATABASE={{ mssql_db }};UID={{ mssql_usr }};PWD={{ mssql_pwd }};TrustServerCertificate=yes;"
+#        query: "select count(*) from DR2H_RIPARTENZA_COLLAUDO_DR_TOvsPR where STATUS = 'IN ATTESA DI INVOCAZIONE'"
+#        commit: false
+#      register: states_count
+#      ignore_errors: true
+#
+#    - debug:
+#        var: states_count
+
+    - name: count mssql states - odbc
+      community.general.odbc:
+        dsn: "DRIVER={ODBC Driver 18 for SQL Server};SERVER={{ mssql_server }};DATABASE={{ mssql_db }};UID={{ mssql_usr }};PWD={{ mssql_pwd }};TrustServerCertificate=yes;"
+        query: "select count(*),STATUS from DR2H_RIPARTENZA_COLLAUDO_DR_TOvsPR group by STATUS"
+        commit: false
+      register: states_count
+      ignore_errors: true
+
+    - debug:
+        var: states_count
+
