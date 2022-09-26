@@ -144,7 +144,7 @@
 
     - set_fact:
         job_id: "{{ item.id }}"
-      when: item.project.name == 'isp_dr' and item.name == 'z play'
+      when: item.name == 'z play'
       with_items: "{{ jobs_templates.json.results }}"
 
     - debug:
