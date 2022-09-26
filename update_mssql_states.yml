@@ -58,8 +58,9 @@
 
   post_tasks:
 
-    - set_fact:
-        isp_dr_global_state: "Starting DR: {{ sito }}@{{ environment }}"
-
+    - name: Write info to file
+      copy:
+        content: "Starting DR: {{ sito }}@{{ environment }}"
+        path: /isp_dir_data/status.txt
 
 

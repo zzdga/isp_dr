@@ -4,8 +4,11 @@
   connection: local
   gather_facts: false
 
+  vars:
+    status_content: "{{ lookup('file',/isp_dr_data/status.txt') }}"
+
   tasks:
 
     - debug:
-        var: isp_dr_global_state
+        msg: "ISP DIR Status: {{ status_content }}"
 
