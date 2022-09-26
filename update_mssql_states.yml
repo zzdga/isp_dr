@@ -56,3 +56,10 @@
     - debug:
         var: states_count
 
+  post_tasks:
+
+    - set_fact:
+        isp_dr_global_state: "Starting DR: {{ sito }}@{{ environment }}"
+
+
+

@@ -1,0 +1,11 @@
+
+- name: "Checking Global Variables"
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+
+    - debug:
+        var: isp_dr_global_state
+
