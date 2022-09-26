@@ -134,7 +134,7 @@
       retries: 2
       register: jobs_templates
 
-#    - debug: var=jobs_templates
+    - debug: var=jobs_templates
 
     - debug:
         #var: item.summary_fields.project
