@@ -61,6 +61,6 @@
     - name: Write info to file
       copy:
         content: "Starting DR: {{ sito }}@{{ environment }}"
-        path: /isp_dir_data/status.txt
+        dest: /isp_dir_data/status.txt
 
 
