@@ -5,10 +5,13 @@
   gather_facts: false
 
   vars:
-    status_content: "{{ lookup('file','/isp_dr_data/status.txt') }}"
+    status_content: "{{ lookup('file','/isp_dr_data/status.json') }}"
 
   tasks:
 
     - debug:
-        msg: "ISP DIR Status: {{ status_content }}"
+        var: status_content
+
+    - debug:
+        msg: "VMWare: {{ status_content.systems['VMWare'].status }} - {{ status_content.systems['VMWare'].msg }}"
 

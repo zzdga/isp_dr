@@ -2,7 +2,6 @@
 - name: "Environment: {{ ambiente }}   Site: {{ sito }} - Query MSSQL Server"
   hosts: localhost
   gather_facts: false
-
   pre_tasks:
 
     - assert:
@@ -58,24 +57,25 @@
 
   post_tasks:
 
-    vars:
-      isp_dr:
-        site: "{{ sito }}"
-        environment: "{{ ambiente }}"
-        stystems:
-          "VMWare":
-            status: 0
-            msg: Waiting Start
-          "Storage":
-            status: 0
-            msg: Waiting Start
-          "DR":
-            status: 1
-            msg: Starting
+    - set_fact:
+        isp_dr:
+          site: "{{ sito }}"
+          environment: "{{ ambiente }}"
+          systems: 
+            "VMWare":
+              status: 0
+              msg: Waiting Start
+            "Storage":
+              status: 0
+              msg: Waiting Start
+            "DR":
+              status: 1
+              msg: Starting
 
     - name: Write info to file
       copy:
-        content: "{{ isp_dr | to_json }}""
+        content: "{{ isp_dr }}"
+        #content: "{{ isp_dr | to_json }}"
         dest: /isp_dr_data/status.json
 
 
