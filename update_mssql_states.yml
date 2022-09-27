@@ -60,7 +60,7 @@
 
     - name: Write info to file
       copy:
-        content: "Starting DR: {{ sito }}@{{ environment }}"
+        content: "Starting DR: {{ sito }}@{{ ambiente }}"
         dest: /isp_dr_data/status.txt
 
 
