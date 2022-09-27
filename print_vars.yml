@@ -5,7 +5,7 @@
   gather_facts: false
 
   vars:
-    status_content: "{{ lookup('file',/isp_dr_data/status.txt') }}"
+    status_content: "{{ lookup('file','/isp_dr_data/status.txt') }}"
 
   tasks:
 
