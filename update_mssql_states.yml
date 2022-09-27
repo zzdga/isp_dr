@@ -58,9 +58,24 @@
 
   post_tasks:
 
+    vars:
+      isp_dr:
+        site: "{{ sito }}"
+        environment: "{{ ambiente }}"
+        stystems:
+          "VMWare":
+            status: 0
+            msg: Waiting Start
+          "Storage":
+            status: 0
+            msg: Waiting Start
+          "DR":
+            status: 1
+            msg: Starting
+
     - name: Write info to file
       copy:
-        content: "Starting DR: {{ sito }}@{{ ambiente }}"
-        dest: /isp_dr_data/status.txt
+        content: "{{ isp_dr | to_json }}""
+        dest: /isp_dr_data/status.json
 
 
